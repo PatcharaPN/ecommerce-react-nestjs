@@ -1,0 +1,125 @@
+.header-con {
+  display: flex;
+  align-items: center;
+  padding: 40px;
+  justify-content: space-between;
+}
+.menu {
+  display: flex;
+  align-items: center;
+}
+.user-con {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(128, 128, 128, 0.568);
+  font-weight: bold;
+  width: 20px;
+  height: 20px;
+  padding: 20px;
+  border-radius: 50px;
+}
+.logo {
+  margin-right: 20px;
+  font-size: 40px;
+}
+
+.search-bar {
+  flex-grow: 1;
+  margin: 0 20px; /* Add margin to ensure spacing between the search bar and other elements */
+}
+
+.search-container {
+  position: relative;
+}
+.icon {
+  font-size: 35px;
+  margin-right: 20px;
+}
+.searchbar {
+  width: 100%; /* Ensure the search bar takes the full width of the container */
+  padding: 10px 10px 10px 30px; /* Adjust padding to make space for the icon */
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: rgba(128, 128, 128, 0.326);
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #888;
+}
+.show-menu {
+  font-size: 30px;
+  display: none;
+}
+
+.drawer-content {
+  display: block;
+  padding: 20px;
+}
+.close-drawer {
+  display: flex;
+  font-size: 30px;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin-top: 10px;
+  width: 250px;
+  height: 70%;
+  background-color: white;
+  box-shadow: 1px 0 5px rgba(0, 0, 0, 0.5);
+  transform: translateX(100%);
+  animation: bounceInRight 0.5s forwards; /* Apply bounceInRight animation */
+  z-index: 1000;
+}
+
+.drawer.open {
+  transform: translateX(0);
+}
+@media (max-width: 480px) {
+  .header-con {
+    display: flex;
+    align-items: center;
+    padding: 30px;
+    justify-content: space-between;
+  }
+  .logo {
+    display: none;
+    margin-right: 20px;
+    font-size: 40px;
+  }
+  .icon {
+    font-size: 25px;
+    margin-right: 10px;
+  }
+  .show-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .searchbar {
+    width: 90%;
+    padding: 10px 10px 10px 30px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: rgba(128, 128, 128, 0.326);
+  }
+  .list {
+    margin-top: 30%;
+  }
+  .list li {
+    font-size: 22px;
+    list-style: none;
+
+    margin-bottom: 5%;
+  }
+}
