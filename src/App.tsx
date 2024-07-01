@@ -1,12 +1,14 @@
 import Banner from "./components/Banner/banner";
 import Categorymenu from "./components/Categorymenu/categorymenu";
-import ProductCard from "./components/Product card/productCard";
+import ProductList from "./components/Product card/productList";
+import Headermenu from "./components/headermenu/headermenu";
 const App: React.FC = () => {
   return (
     <div>
       <Banner />
       <Categorymenu />
-      <ProductCard />
+      <Headermenu />
+      <ProductList />
     </div>
   );
 };

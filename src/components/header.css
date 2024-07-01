@@ -78,7 +78,7 @@
   background-color: white;
   box-shadow: 1px 0 5px rgba(0, 0, 0, 0.5);
   transform: translateX(100%);
-  animation: bounceInRight 0.5s forwards; /* Apply bounceInRight animation */
+  animation: bounceInRight 0.5s forwards;
   z-index: 1000;
 }
 

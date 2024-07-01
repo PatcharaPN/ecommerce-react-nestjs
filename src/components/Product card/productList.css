@@ -1,0 +1,16 @@
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* ระยะห่างระหว่างแต่ละ card */
+}
+
+@media (max-width: 768px) {
+}
+
+@media (max-width: 480px) {
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px; /* ระยะห่างระหว่างแต่ละ card */
+  }
+}

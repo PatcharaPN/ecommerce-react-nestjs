@@ -1,10 +1,36 @@
 import React from "react";
 import "./productCard.css";
+import RatingComponent from "../star rating/ratingstar";
 
-const ProductCard: React.FC = (prop) => {
+interface ProductCardProps {
+  title: string;
+  price: number;
+  productimage: string;
+  rating: number;
+}
+
+const ProductCard: React.FC<ProductCardProps> = ({
+  title,
+  price,
+  productimage,
+  rating,
+}) => {
   return (
     <div className="card-container">
-      <div className="product-pic"></div>
+      <div className="image-wrapper">
+        {" "}
+        <div className="product-pic">
+          <img src={productimage} alt="" />
+        </div>
+      </div>
+
+      <div className="desc-product">
+        <div>{title}</div>
+        <div>{price}</div>
+      </div>
+      <div>
+        <RatingComponent rating={rating} />
+      </div>
     </div>
   );
 };
