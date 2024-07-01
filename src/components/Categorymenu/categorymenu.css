@@ -25,5 +25,6 @@
 }
 
 .shortmenu div {
+  font-weight: bold;
   margin-top: 0.5rem;
 }
