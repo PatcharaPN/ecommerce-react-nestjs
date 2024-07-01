@@ -1,0 +1,29 @@
+.category-container {
+  padding-top: 5%;
+  width: 100%;
+  height: auto;
+}
+
+.category-menu {
+  display: flex;
+  justify-content: center;
+}
+.shortmenu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 83px;
+  height: 95px;
+  text-align: center;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.shortmenu .menuicon {
+  font-size: 3rem;
+}
+
+.shortmenu div {
+  margin-top: 0.5rem;
+}

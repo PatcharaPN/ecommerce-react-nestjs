@@ -1,10 +1,11 @@
-import "./App.css";
-
+import Banner from "./components/Banner/banner";
+import Categorymenu from "./components/Categorymenu/categorymenu";
 function App() {
   return (
-    <>
-      <div>asdadsa</div>
-    </>
+    <div>
+      <Banner />
+      <Categorymenu />
+    </div>
   );
 }
 

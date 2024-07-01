@@ -1,0 +1,30 @@
+.sidebar-right {
+  background-color: transparent;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.filter {
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100%;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  background-color: #d9d9d9;
+  border-radius: 50px;
+}
+
+.filter-btn {
+  color: #00000087;
+  font-weight: bold;
+  border: none;
+  background-color: transparent;
+}
+@media (max-width: 480px) {
+  .sidebar-right {
+    display: none;
+  }
+}

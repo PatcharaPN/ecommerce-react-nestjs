@@ -37,7 +37,7 @@
   margin-right: 20px;
 }
 .searchbar {
-  width: 100%; /* Ensure the search bar takes the full width of the container */
+  width: 100%;
   padding: 10px 10px 10px 30px; /* Adjust padding to make space for the icon */
   border: 1px solid #ccc;
   border-radius: 20px;
