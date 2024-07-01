@@ -3,7 +3,7 @@ import "./headermenu.css";
 function Headermenu() {
   return (
     <div className="headermenu">
-      <div>News arrivals</div>
+      <div className="text-header">News arrivals</div>
       <div className="text-underline">View more</div>
     </div>
   );

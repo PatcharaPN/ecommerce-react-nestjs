@@ -36,6 +36,22 @@ const ProductList: React.FC = () => {
         "https://m.media-amazon.com/images/I/61lYIKPieDL._AC_UY218_.jpg",
       rating: 3,
     },
+    {
+      id: 4,
+      title: "Macbook Air M2",
+      price: 39.99,
+      productimage:
+        "https://m.media-amazon.com/images/I/81xW62KXNhL._AC_UY218_.jpg",
+      rating: 3,
+    },
+    {
+      id: 5,
+      title: "Macbook Air M3 15",
+      price: 39.99,
+      productimage:
+        "https://m.media-amazon.com/images/I/71O14N5GYLL._AC_UY218_.jpg",
+      rating: 3,
+    },
   ];
 
   const [products, setProducts] = useState<Product[]>(mockupProducts);

@@ -11,7 +11,7 @@
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 1fr 1fr;
   gap: 10px;
-  max-width: 90%;
+  max-width: 80%;
 }
 
 .large-image {
@@ -23,7 +23,7 @@
   align-items: center;
 }
 img {
-  width: 90%;
+  width: 100%;
   height: auto;
   display: block;
   border-radius: 10px;

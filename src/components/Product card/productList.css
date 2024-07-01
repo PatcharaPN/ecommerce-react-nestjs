@@ -1,7 +1,7 @@
 .product-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px; /* ระยะห่างระหว่างแต่ละ card */
+  gap: 5px; /* ระยะห่างระหว่างแต่ละ card */
 }
 
 @media (max-width: 768px) {
