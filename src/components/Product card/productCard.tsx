@@ -20,7 +20,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       <div className="image-wrapper">
         {" "}
         <div className="product-pic">
-          <img src={productimage} alt="" />
+          <img className="product-img" src={productimage} alt="" />
         </div>
       </div>
 

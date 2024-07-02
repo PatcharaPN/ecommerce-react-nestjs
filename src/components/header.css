@@ -89,7 +89,7 @@
   .header-con {
     display: flex;
     align-items: center;
-    padding: 30px;
+    padding: 20px;
     justify-content: space-between;
   }
   .logo {

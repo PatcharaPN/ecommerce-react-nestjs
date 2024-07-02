@@ -1,8 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ProductCard from "./productCard";
-import { useState } from "react";
-import "./productList.css";
-import { Icon } from "@iconify/react";
+import "./newproductList.css";
 
 interface Product {
   id: number;
@@ -12,7 +10,7 @@ interface Product {
   rating: number;
 }
 
-const ProductList: React.FC = () => {
+const NewProductList: React.FC = () => {
   const mockupProducts: Product[] = [
     {
       id: 1,
@@ -59,28 +57,18 @@ const ProductList: React.FC = () => {
   const [products, setProducts] = useState<Product[]>(mockupProducts);
 
   return (
-    <div className="productlist-container">
-      <div className="filter-product">
-        <div className="filter-product-slider">
-          <div>Select</div>
-          <Icon icon="octicon:triangle-down-16" />
-        </div>
-      </div>
-      <div className="list-product-wrapper">
-        <div className="list-product">
-          {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              title={product.title}
-              price={product.price}
-              productimage={product.productimage}
-              rating={product.rating}
-            />
-          ))}
-        </div>
-      </div>
+    <div className="product-list">
+      {products.map((product) => (
+        <ProductCard
+          key={product.id}
+          title={product.title}
+          price={product.price}
+          productimage={product.productimage}
+          rating={product.rating}
+        />
+      ))}
     </div>
   );
 };
 
-export default ProductList;
+export default NewProductList;
