@@ -4,15 +4,16 @@ const SidebarLeft = () => {
   return (
     <aside className="sidebar-left">
       <nav>
+        <p>Category</p>
         <ul>
-          <li>Clothes</li>
-          <li>Electronics</li>
-          <li>Furnitures</li>
-          <li>IT</li>
-          <li>Sneakers</li>
-          <li>Games</li>
-          <li>Beauty</li>
-          <li>Pet</li>
+          <li>Apple Products</li>
+          <li>Notebook</li>
+          <li>Smartphone</li>
+          <li>Tablet</li>
+          <li>TV</li>
+          <li>Wearables</li>
+          <li>Accessories</li>
+          <li>Computer</li>
         </ul>
       </nav>
     </aside>

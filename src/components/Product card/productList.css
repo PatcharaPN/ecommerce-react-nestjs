@@ -9,32 +9,22 @@
   width: 100%;
   margin-bottom: 20px;
 }
+
 .list-product-wrapper {
   width: 100%;
   display: flex;
   justify-content: center;
 }
+
 .list-product {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  gap: 20px;
-  max-width: 80%;
+  gap: 0px;
+  max-width: 85%;
+  padding: auto;
 }
-.filter-product-slider {
-  display: flex;
-  gap: 40px;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  width: fit-content;
-  margin-left: 140px;
-  font-weight: bold;
-  font-size: 14px;
-  color: #00000081;
-  border-radius: 20px;
-  background-color: rgba(126, 126, 126, 0.305);
-}
+
 .product-card {
   flex: 1 1 calc(25% - 20px);
   max-width: calc(25% - 20px);
@@ -52,12 +42,5 @@
   .product-card {
     flex: 1 1 100%;
     max-width: 100%;
-  }
-  .list-product {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    max-width: 80%;
   }
 }

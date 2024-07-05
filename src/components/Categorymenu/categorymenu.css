@@ -49,3 +49,37 @@
     margin-right: 1rem;
   }
 }
+@media only screen and (min-width: 1024px) and (max-width: 1440px) {
+  .category-container {
+    margin-top: 20px;
+    margin-bottom: 5%;
+
+    width: 100%;
+    height: auto;
+  }
+
+  .category-menu {
+    display: flex;
+    justify-content: center;
+  }
+  .shortmenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 53px;
+    height: 53px;
+    text-align: center;
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+
+  .shortmenu .menuicon {
+    font-size: 3rem;
+  }
+
+  .shortmenu div {
+    font-weight: bold;
+    margin-top: 0.5rem;
+  }
+}

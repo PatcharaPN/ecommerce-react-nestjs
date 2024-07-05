@@ -7,6 +7,7 @@ interface ProductCardProps {
   price: number;
   productimage: string;
   rating: number;
+  openModal: () => void;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -14,9 +15,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
   price,
   productimage,
   rating,
+  openModal,
 }) => {
   return (
-    <div className="card-container">
+    <div className="card-container" onClick={openModal}>
       <div className="image-wrapper">
         {" "}
         <div className="product-pic">

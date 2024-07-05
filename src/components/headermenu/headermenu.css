@@ -1,7 +1,8 @@
 .headermenu {
   display: flex;
   justify-content: space-between;
-  padding: 15px;
+  padding-left: 150px;
+  padding-right: 150px;
 }
 .text-underline {
   text-decoration: underline;

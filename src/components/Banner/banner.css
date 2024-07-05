@@ -1,6 +1,6 @@
 .banner-wrapper {
   padding-bottom: 5%;
-  padding-top: 5%;
+  padding-top: 2%;
 }
 
 .banner-content1-slider {
@@ -54,5 +54,47 @@
     height: auto;
     border-radius: 7.5px;
     object-fit: cover;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1440px) {
+  .banner-wrapper {
+    padding-bottom: 5%;
+    padding-top: 2%;
+  }
+
+  .banner-content1-slider {
+    display: none;
+  }
+
+  .banner-content1 {
+    display: flex;
+    justify-content: center;
+  }
+
+  .image-section {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+    max-width: 80%;
+  }
+
+  .large-image {
+    grid-row: span 2;
+  }
+
+  .small-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 10px;
   }
 }

@@ -1,7 +1,7 @@
 .header-con {
   display: flex;
   align-items: center;
-  padding: 40px;
+  padding: 20px;
   justify-content: space-between;
 }
 .menu {
@@ -21,12 +21,12 @@
 }
 .logo {
   margin-right: 20px;
-  font-size: 40px;
+  font-size: 30px;
 }
 
 .search-bar {
   flex-grow: 1;
-  margin: 0 20px; /* Add margin to ensure spacing between the search bar and other elements */
+  margin: 0 40px;
 }
 
 .search-container {
@@ -38,7 +38,7 @@
 }
 .searchbar {
   width: 100%;
-  padding: 10px 10px 10px 30px; /* Adjust padding to make space for the icon */
+  padding: 5px 5px 5px 30px; /* Adjust padding to make space for the icon */
   border: 1px solid #ccc;
   border-radius: 20px;
   background-color: rgba(128, 128, 128, 0.326);
@@ -67,11 +67,14 @@
   justify-content: flex-end;
   cursor: pointer;
 }
+.list {
+  margin-top: 30%;
+}
 
 .drawer {
   position: fixed;
-  top: 0;
-  right: 0;
+  top: 0px;
+  right: 0px;
   margin-top: 10px;
   width: 250px;
   height: 70%;
@@ -83,7 +86,7 @@
 }
 
 .drawer.open {
-  transform: translateX(0);
+  transform: translateX(0%);
 }
 @media (max-width: 480px) {
   .header-con {

@@ -1,6 +1,7 @@
 import { Icon } from "@iconify/react";
 import "./header.css";
 import { useState } from "react";
+import { Cart } from "./cart/cart";
 
 const Header: React.FC = () => {
   const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false);
@@ -23,7 +24,7 @@ const Header: React.FC = () => {
       </div>
       <div className="menu">
         <Icon className="icon" icon="majesticons:chat-line" />
-        <Icon className="icon" icon="mdi:cart-outline" />
+        <Cart />
         <div className="user-con" onClick={toggleDrawer}>
           PC
         </div>

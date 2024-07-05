@@ -3,6 +3,7 @@ import Categorymenu from "./components/Categorymenu/categorymenu";
 import NewProductList from "./components/Product card/newproductList";
 import Headermenu from "./components/headermenu/headermenu";
 import ProductList from "./components/Product card/productList";
+import { Footer } from "./components/Footer/footer";
 const App: React.FC = () => {
   return (
     <div>
@@ -20,6 +21,7 @@ const App: React.FC = () => {
         smallImagebot="https://static.vecteezy.com/system/resources/thumbnails/002/006/775/small_2x/paper-art-shopping-online-on-smartphone-and-new-buy-sale-promotion-backgroud-for-banner-market-ecommerce-free-vector.jpg"
       />
       <ProductList />
+      <Footer />
     </div>
   );
 };
