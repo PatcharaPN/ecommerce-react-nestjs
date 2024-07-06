@@ -1,241 +1,64 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import ProductCard from "./productCard";
 import { useState } from "react";
 import "./productList.css";
-import { Icon } from "@iconify/react";
+import { useAppDispatch } from "../../app/store";
 import { ProductModal } from "../product-modal/product-modal";
-
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  productimage: string;
-  rating: number;
-}
+import { getProducts, Product } from "../../app/features/productSlice";
 
 const ProductList: React.FC = () => {
+  const [selectedProduct, setSelectedProduct] = useState<Product | undefined>(
+    undefined
+  );
+  const [products, setProducts] = useState<Product[]>([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const openModal = () => {
-    setIsModalOpen(!isModalOpen);
+  const dispatch = useAppDispatch();
+
+  const fetchProducts = useCallback(async () => {
+    try {
+      const response = await dispatch(getProducts()).unwrap();
+      setProducts(response);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
+
+  const handleProductClick = (product: Product) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(!isModalOpen);
+  const handleModalClose = () => {
+    setIsModalOpen(false);
   };
-  const mockupProducts: Product[] = [
-    {
-      id: 1,
-      title: "Macbook Pro M1",
-      price: 19.99,
-      productimage:
-        "https://media-cdn.bnn.in.th/105757/Apple-MacBook-Pro-13-M1-chip-8C-CPU-7C-GPU-8GB-512GB-Space-Grey-2020-1-square_medium.jpg",
-      rating: 4,
-    },
-    {
-      id: 1,
-      title: "Macbook Pro M1",
-      price: 19.99,
-      productimage:
-        "https://media-cdn.bnn.in.th/105757/Apple-MacBook-Pro-13-M1-chip-8C-CPU-7C-GPU-8GB-512GB-Space-Grey-2020-1-square_medium.jpg",
-      rating: 4,
-    },
-    {
-      id: 1,
-      title: "Macbook Pro M1",
-      price: 19.99,
-      productimage:
-        "https://media-cdn.bnn.in.th/105757/Apple-MacBook-Pro-13-M1-chip-8C-CPU-7C-GPU-8GB-512GB-Space-Grey-2020-1-square_medium.jpg",
-      rating: 4,
-    },
-    {
-      id: 1,
-      title: "Macbook Pro M1",
-      price: 19.99,
-      productimage:
-        "https://media-cdn.bnn.in.th/105757/Apple-MacBook-Pro-13-M1-chip-8C-CPU-7C-GPU-8GB-512GB-Space-Grey-2020-1-square_medium.jpg",
-      rating: 4,
-    },
-    {
-      id: 1,
-      title: "Macbook Pro M1",
-      price: 19.99,
-      productimage:
-        "https://media-cdn.bnn.in.th/105757/Apple-MacBook-Pro-13-M1-chip-8C-CPU-7C-GPU-8GB-512GB-Space-Grey-2020-1-square_medium.jpg",
-      rating: 4,
-    },
-    {
-      id: 1,
-      title: "Macbook Pro M1",
-      price: 19.99,
-      productimage:
-        "https://media-cdn.bnn.in.th/105757/Apple-MacBook-Pro-13-M1-chip-8C-CPU-7C-GPU-8GB-512GB-Space-Grey-2020-1-square_medium.jpg",
-      rating: 4,
-    },
-    {
-      id: 1,
-      title: "Macbook Pro M1",
-      price: 19.99,
-      productimage:
-        "https://media-cdn.bnn.in.th/105757/Apple-MacBook-Pro-13-M1-chip-8C-CPU-7C-GPU-8GB-512GB-Space-Grey-2020-1-square_medium.jpg",
-      rating: 4,
-    },
-    {
-      id: 1,
-      title: "Macbook Pro M1",
-      price: 19.99,
-      productimage:
-        "https://media-cdn.bnn.in.th/105757/Apple-MacBook-Pro-13-M1-chip-8C-CPU-7C-GPU-8GB-512GB-Space-Grey-2020-1-square_medium.jpg",
-      rating: 4,
-    },
-    {
-      id: 1,
-      title: "Macbook Pro M1",
-      price: 19.99,
-      productimage:
-        "https://media-cdn.bnn.in.th/105757/Apple-MacBook-Pro-13-M1-chip-8C-CPU-7C-GPU-8GB-512GB-Space-Grey-2020-1-square_medium.jpg",
-      rating: 4,
-    },
-    {
-      id: 1,
-      title: "Macbook Pro M1",
-      price: 19.99,
-      productimage:
-        "https://media-cdn.bnn.in.th/105757/Apple-MacBook-Pro-13-M1-chip-8C-CPU-7C-GPU-8GB-512GB-Space-Grey-2020-1-square_medium.jpg",
-      rating: 4,
-    },
-    {
-      id: 1,
-      title: "Macbook Pro M1",
-      price: 19.99,
-      productimage:
-        "https://media-cdn.bnn.in.th/105757/Apple-MacBook-Pro-13-M1-chip-8C-CPU-7C-GPU-8GB-512GB-Space-Grey-2020-1-square_medium.jpg",
-      rating: 4,
-    },
-    {
-      id: 1,
-      title: "Macbook Pro M1",
-      price: 19.99,
-      productimage:
-        "https://media-cdn.bnn.in.th/105757/Apple-MacBook-Pro-13-M1-chip-8C-CPU-7C-GPU-8GB-512GB-Space-Grey-2020-1-square_medium.jpg",
-      rating: 4,
-    },
-    {
-      id: 1,
-      title: "Macbook Pro M1",
-      price: 19.99,
-      productimage:
-        "https://media-cdn.bnn.in.th/105757/Apple-MacBook-Pro-13-M1-chip-8C-CPU-7C-GPU-8GB-512GB-Space-Grey-2020-1-square_medium.jpg",
-      rating: 4,
-    },
-    {
-      id: 1,
-      title: "Macbook Pro M1",
-      price: 19.99,
-      productimage:
-        "https://media-cdn.bnn.in.th/105757/Apple-MacBook-Pro-13-M1-chip-8C-CPU-7C-GPU-8GB-512GB-Space-Grey-2020-1-square_medium.jpg",
-      rating: 4,
-    },
-    {
-      id: 1,
-      title: "Macbook Pro M1",
-      price: 19.99,
-      productimage:
-        "https://media-cdn.bnn.in.th/105757/Apple-MacBook-Pro-13-M1-chip-8C-CPU-7C-GPU-8GB-512GB-Space-Grey-2020-1-square_medium.jpg",
-      rating: 4,
-    },
-    {
-      id: 1,
-      title: "Macbook Pro M1",
-      price: 19.99,
-      productimage:
-        "https://media-cdn.bnn.in.th/105757/Apple-MacBook-Pro-13-M1-chip-8C-CPU-7C-GPU-8GB-512GB-Space-Grey-2020-1-square_medium.jpg",
-      rating: 4,
-    },
-    {
-      id: 1,
-      title: "Macbook Pro M1",
-      price: 19.99,
-      productimage:
-        "https://media-cdn.bnn.in.th/105757/Apple-MacBook-Pro-13-M1-chip-8C-CPU-7C-GPU-8GB-512GB-Space-Grey-2020-1-square_medium.jpg",
-      rating: 4,
-    },
-    {
-      id: 1,
-      title: "Macbook Pro M1",
-      price: 19.99,
-      productimage:
-        "https://media-cdn.bnn.in.th/105757/Apple-MacBook-Pro-13-M1-chip-8C-CPU-7C-GPU-8GB-512GB-Space-Grey-2020-1-square_medium.jpg",
-      rating: 4,
-    },
-    {
-      id: 1,
-      title: "Macbook Pro M1",
-      price: 19.99,
-      productimage:
-        "https://media-cdn.bnn.in.th/105757/Apple-MacBook-Pro-13-M1-chip-8C-CPU-7C-GPU-8GB-512GB-Space-Grey-2020-1-square_medium.jpg",
-      rating: 4,
-    },
-    {
-      id: 1,
-      title: "Macbook Pro M1",
-      price: 19.99,
-      productimage:
-        "https://media-cdn.bnn.in.th/105757/Apple-MacBook-Pro-13-M1-chip-8C-CPU-7C-GPU-8GB-512GB-Space-Grey-2020-1-square_medium.jpg",
-      rating: 4,
-    },
-    {
-      id: 1,
-      title: "Macbook Pro M1",
-      price: 19.99,
-      productimage:
-        "https://media-cdn.bnn.in.th/105757/Apple-MacBook-Pro-13-M1-chip-8C-CPU-7C-GPU-8GB-512GB-Space-Grey-2020-1-square_medium.jpg",
-      rating: 4,
-    },
-    {
-      id: 1,
-      title: "Macbook Pro M1",
-      price: 19.99,
-      productimage:
-        "https://media-cdn.bnn.in.th/105757/Apple-MacBook-Pro-13-M1-chip-8C-CPU-7C-GPU-8GB-512GB-Space-Grey-2020-1-square_medium.jpg",
-      rating: 4,
-    },
-    {
-      id: 1,
-      title: "Macbook Pro M1",
-      price: 19.99,
-      productimage:
-        "https://media-cdn.bnn.in.th/105757/Apple-MacBook-Pro-13-M1-chip-8C-CPU-7C-GPU-8GB-512GB-Space-Grey-2020-1-square_medium.jpg",
-      rating: 4,
-    },
-    {
-      id: 1,
-      title: "Macbook Pro M1",
-      price: 19.99,
-      productimage:
-        "https://media-cdn.bnn.in.th/105757/Apple-MacBook-Pro-13-M1-chip-8C-CPU-7C-GPU-8GB-512GB-Space-Grey-2020-1-square_medium.jpg",
-      rating: 4,
-    },
-  ];
-
-  const [products, setProducts] = useState<Product[]>(mockupProducts);
 
   return (
-    <div className="productlist-container">
-      <div className="filter-product"></div>
-      <div className="list-product-wrapper">
-        <div className="list-product">
-          {products.map((product) => (
-            <ProductCard
-              openModal={openModal}
-              key={product.id}
-              title={product.title}
-              price={product.price}
-              productimage={product.productimage}
-              rating={product.rating}
+    <div className="product-list-container">
+      <div className="filter-products"></div>
+      <div className="product-list-wrapper">
+        <div className="product-list">
+          {products.length === 0 ? (
+            <div>Products not found</div>
+          ) : (
+            products.map((product, index) => (
+              <ProductCard
+                key={index}
+                product={product}
+                onClick={() => handleProductClick(product)}
+              />
+            ))
+          )}
+          {isModalOpen && selectedProduct && (
+            <ProductModal
+              product={selectedProduct}
+              closeModal={handleModalClose}
             />
-          ))}
-          {isModalOpen && <ProductModal closeModal={closeModal} />}
+          )}
         </div>
       </div>
     </div>

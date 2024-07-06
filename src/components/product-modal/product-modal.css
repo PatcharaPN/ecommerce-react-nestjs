@@ -6,14 +6,19 @@
 .product-pic {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 80%;
   height: fit-content;
 }
 .pic {
-  width: 600px;
-  height: 400px;
+  width: fit-content;
+  height: fit-content;
   border-radius: 20px;
   background-color: rgba(128, 128, 128, 0.233);
+}
+.product-img-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .another-pic {
   margin-top: 10px;

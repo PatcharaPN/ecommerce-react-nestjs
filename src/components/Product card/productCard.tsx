@@ -1,40 +1,30 @@
 import React from "react";
 import "./productCard.css";
 import RatingComponent from "../star rating/ratingstar";
+import { Product } from "../../app/features/productSlice";
 
 interface ProductCardProps {
-  title: string;
-  price: number;
-  productimage: string;
-  rating: number;
-  openModal: () => void;
+  product: Product;
+  onClick: () => void;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({
-  title,
-  price,
-  productimage,
-  rating,
-  openModal,
-}) => {
-  return (
-    <div className="card-container" onClick={openModal}>
+const ProductCard: React.FC<ProductCardProps> = ({ product, onClick }) => {
+  return product ? (
+    <div className="card-container" onClick={onClick}>
       <div className="image-wrapper">
-        {" "}
         <div className="product-pic">
-          <img className="product-img" src={productimage} alt="" />
+          <img className="product-img" src={product.productImage} alt="" />
         </div>
       </div>
-
       <div className="desc-product">
-        <div>{title}</div>
-        <div>{price}</div>
+        <div>{product.title}</div>
+        <div>{product.price}</div>
       </div>
       <div>
-        <RatingComponent rating={rating} />
+        <RatingComponent rating={product.rating} />
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default ProductCard;

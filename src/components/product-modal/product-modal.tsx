@@ -2,12 +2,17 @@ import React from "react";
 import "./product-modal.css";
 import RatingComponent from "../star rating/ratingstar";
 import { Icon } from "@iconify/react";
+import { Product } from "../../app/features/productSlice";
 
 interface ProductModalProps {
+  product?: Product;
   closeModal: () => void;
 }
 
-export const ProductModal: React.FC<ProductModalProps> = ({ closeModal }) => {
+export const ProductModal: React.FC<ProductModalProps> = ({
+  product,
+  closeModal,
+}) => {
   return (
     <div className="modal-backdrop" onClick={closeModal}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -15,31 +20,19 @@ export const ProductModal: React.FC<ProductModalProps> = ({ closeModal }) => {
           <span className="close" onClick={closeModal}>
             &times;
           </span>
-          {/* เนื้อหาของ Modal */}
+
           <div className="product-content">
             <div className="product-pic">
-              <div className="pic"></div>
-              <div className="another-pic">
-                <div
-                  className="pic-small
-                "
-                ></div>
-                <div
-                  className="pic-small
-                "
-                ></div>
-                <div
-                  className="pic-small
-                "
-                ></div>{" "}
-                <div
-                  className="pic-small
-              "
-                ></div>
+              <div className="product-img-wrapper">
+                <img
+                  className="product-pic"
+                  src={product?.productImage}
+                  alt=""
+                />
               </div>
             </div>
             <div className="product-detail">
-              <h1>Macbook Pro M1</h1>
+              <h1>{product?.title}</h1>
               <div className="rating-section">
                 <div className="rating">
                   <RatingComponent rating={2} />
