@@ -10,15 +10,15 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onClick }) => {
   return product ? (
-    <div className="card-container" onClick={onClick}>
+    <div className="card-container " id="card" onClick={onClick}>
       <div className="image-wrapper">
         <div className="product-pic">
-          <img className="product-img" src={product.productImage} alt="" />
+          <img className="product-img" src={product.imageUrl} alt="" />
         </div>
       </div>
       <div className="desc-product">
-        <div>{product.title}</div>
-        <div>{product.price}</div>
+        <div className="product-name">{product.name}</div>
+        <div className="price">฿{product.price}</div>
       </div>
       <div>
         <RatingComponent rating={product.rating} />

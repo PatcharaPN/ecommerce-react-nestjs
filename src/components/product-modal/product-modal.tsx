@@ -20,19 +20,14 @@ export const ProductModal: React.FC<ProductModalProps> = ({
           <span className="close" onClick={closeModal}>
             &times;
           </span>
-
           <div className="product-content">
             <div className="product-pic">
               <div className="product-img-wrapper">
-                <img
-                  className="product-pic"
-                  src={product?.productImage}
-                  alt=""
-                />
+                <img className="product-pic" src={product?.imageUrl} alt="" />
               </div>
             </div>
             <div className="product-detail">
-              <h1>{product?.title}</h1>
+              <h1>{product?.name}</h1>
               <div className="rating-section">
                 <div className="rating">
                   <RatingComponent rating={2} />
@@ -56,6 +51,29 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               <div className="buttonsection">
                 <button className="shop-btn">Buy Now</button>
                 <button className="shop-btn">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+          <div className="description-section">
+            <div className="first-desc">
+              <h3 className="detail-header">Details of Product</h3>
+            </div>
+          </div>
+          <div className="shop-section">
+            <div className="shop-picture"></div>
+            <div className="shop-information">
+              <div className="shop-desc">
+                <p className="shop-info name ">Somchai Shop</p>
+                <p className="shop-info desc">Shop Description</p>
+                <div className="follower-section">
+                  <p className="shop-info follower">Follower</p>
+                  <p className="shop-info following">Following</p>
+                </div>
+              </div>
+
+              <div className="follow-btn-section">
+                <button className="follow-btn">Follow</button>
+                <button className="chat-btn">Chat</button>
               </div>
             </div>
           </div>

@@ -5,10 +5,10 @@ import axios from "axios";
 
 export interface Product {
   _id: string;
-  title: string;
+  name: string;
   price: number;
   description: string;
-  productImage: string;
+  imageUrl: string;
   rating: number;
 }
 
@@ -24,7 +24,7 @@ export const getProducts: AsyncThunk<Product[], void, any> = createAsyncThunk(
   "product/getProducts",
   async (): Promise<Product[]> => {
     const { data: res } = await axios.get<Product[]>(
-      "http://localhost:3000/product"
+      "http://localhost:3000/products"
     );
     return res;
   }
