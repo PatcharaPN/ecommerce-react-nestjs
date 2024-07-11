@@ -44,6 +44,28 @@
   background-color: rgba(128, 128, 128, 0.326);
 }
 
+.drawer-menu {
+  height: 550px;
+  display: flex;
+  justify-items: end;
+  justify-content: space-between;
+}
+.logout {
+  display: flex;
+  justify-content: end;
+}
+.list {
+  li {
+    list-style: none;
+  }
+}
+.logout-btn {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background-color: #515151;
+  color: #ffffff;
+}
 .search-icon {
   position: absolute;
   top: 50%;

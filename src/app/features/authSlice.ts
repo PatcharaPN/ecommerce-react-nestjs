@@ -28,6 +28,19 @@ export const login = createAsyncThunk<
   return response.data;
 });
 
+export const register = createAsyncThunk<
+  any,
+  { email: string; password: string },
+  { state: RootState }
+>("/auth/register", async ({ email, password }) => {
+  const response = await axios.post("http://localhost:3000/auth/register", {
+    email,
+    password,
+    confirmPassword: password,
+  });
+  return response.data;
+});
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -39,6 +52,18 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(register.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(register.fulfilled, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(register.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to login";
+      })
       .addCase(login.pending, (state) => {
         state.loading = true;
         state.error = null;

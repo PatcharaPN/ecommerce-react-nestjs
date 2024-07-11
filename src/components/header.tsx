@@ -11,6 +11,11 @@ const Header: React.FC = () => {
     setDrawerOpen(!isDrawerOpen);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
+
   return (
     <div className="header-con">
       <div className="logo">
@@ -39,13 +44,20 @@ const Header: React.FC = () => {
             <div>UID</div>
             <div className="user-profile"></div>
           </div>
-          <ul className="list">
-            <li>Profile</li>
-            <li>Favorite</li>
-            <li>My Addresses</li>
-            <li>Bank Accounts</li>
-            <li>Help Centre</li>
-          </ul>
+          <div className="drawer-menu">
+            <ul className="list">
+              <li>Profile</li>
+              <li>Favorite</li>
+              <li>My Addresses</li>
+              <li>Bank Accounts</li>
+              <li>Help Centre</li>
+            </ul>
+          </div>
+          <div className="logout">
+            <button className="logout-btn" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
         </div>
       </div>
     </div>
