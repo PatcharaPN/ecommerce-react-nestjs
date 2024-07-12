@@ -2,16 +2,34 @@ import { Icon } from "@iconify/react";
 import { useState } from "react";
 import "./cart.css";
 import Divider from "../divider";
+import { useDispatch, useSelector, UseSelector } from "react-redux";
+import { RootState } from "../../app/store";
+import { removeItemFromCart } from "../../app/features/cartSlice";
 
 export const Cart: React.FC = () => {
   const [isopenCart, setisopenCart] = useState<boolean>(false);
+  const cartItems = useSelector((state: RootState) => state.cart.items);
+  const dispatch = useDispatch();
+  console.log(cartItems);
 
   const handleClickCart = () => {
     setisopenCart(!isopenCart);
   };
 
+  const calculateTotalprice = () => {
+    let totalPrice = 0;
+    cartItems.forEach((item) => {
+      totalPrice += item.price * item.quantity;
+    });
+    return totalPrice;
+  };
+
   const closeModal = () => {
     setisopenCart(false);
+  };
+
+  const handleRemoveItem = (productId: string) => {
+    dispatch(removeItemFromCart(productId));
   };
 
   return (
@@ -48,9 +66,41 @@ export const Cart: React.FC = () => {
                     <li className="list-item">Item</li>
                     <li className="product-info">Product Price</li>
                     <li className="product-info">Quantity</li>
-                    <li className="product-info">Total Price</li>
+                    <li className="product-info">Action</li>
                   </div>
                   <Divider />
+                  <div className="cart-items-list">
+                    {cartItems.map((product) => (
+                      <div className="cart-item" key={product._id}>
+                        <div className="cart-items-name">
+                          <img
+                            className="cart-img"
+                            src={product.imageUrl}
+                            alt=""
+                          />
+                          <p>{product.name}</p>
+                        </div>
+                        <div className="cart-items price">
+                          <p>
+                            {" "}
+                            {"$"}
+                            {product.price}
+                          </p>
+                        </div>
+                        <div className="cart-items-quantity">
+                          <p>{product.quantity}</p>
+                        </div>
+                        <div className="cart-items action">
+                          <button
+                            className="btn-remove"
+                            onClick={() => handleRemoveItem(product._id)}
+                          >
+                            remove
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
 
                 <div className="cart-summary">
@@ -66,7 +116,10 @@ export const Cart: React.FC = () => {
                         <p>{"$"}0</p>
                         <p>{"$"}0</p>
                         <p>{"$"}0</p>
-                        <p>{"$"}0</p>
+                        <p>
+                          {"$"}
+                          {calculateTotalprice()}
+                        </p>
                       </div>
                     </div>
 

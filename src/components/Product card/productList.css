@@ -10,13 +10,13 @@
   margin-bottom: 20px;
 }
 
-.list-product-wrapper {
+.product-list-wrapper {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.list-product {
+.product-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;

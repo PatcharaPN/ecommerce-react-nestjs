@@ -3,6 +3,8 @@ import "./product-modal.css";
 import RatingComponent from "../star rating/ratingstar";
 import { Icon } from "@iconify/react";
 import { Product } from "../../app/features/productSlice";
+import { useDispatch } from "react-redux";
+import { addItemToCart } from "../../app/features/cartSlice";
 
 interface ProductModalProps {
   product?: Product;
@@ -13,6 +15,13 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   product,
   closeModal,
 }) => {
+  const dispatch = useDispatch();
+  console.log(product);
+
+  const handleAddToCart = (product: Product) => {
+    dispatch(addItemToCart(product));
+    console.log("added to cart");
+  };
   return (
     <div className="modal-backdrop" onClick={closeModal}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -50,7 +59,12 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               </div>
               <div className="buttonsection">
                 <button className="shop-btn">Buy Now</button>
-                <button className="shop-btn">Add to Cart</button>
+                <button
+                  className="shop-btn"
+                  onClick={() => handleAddToCart(product!)}
+                >
+                  Add to Cart
+                </button>
               </div>
             </div>
           </div>

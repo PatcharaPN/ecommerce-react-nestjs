@@ -7,9 +7,7 @@ import { ProductModal } from "../product-modal/product-modal";
 import { getProducts, Product } from "../../app/features/productSlice";
 
 const ProductList: React.FC = () => {
-  const [selectedProduct, setSelectedProduct] = useState<Product | undefined>(
-    undefined
-  );
+  const [selectedProduct, setSelectedProduct] = useState<Product>();
   const [products, setProducts] = useState<Product[]>([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
@@ -30,6 +28,8 @@ const ProductList: React.FC = () => {
 
   const handleProductClick = (product: Product) => {
     setSelectedProduct(product);
+    console.log(selectedProduct);
+
     setIsModalOpen(true);
   };
 

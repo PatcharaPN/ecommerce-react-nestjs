@@ -10,7 +10,7 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onClick }) => {
   return product ? (
-    <div className="card-container " id="card" onClick={onClick}>
+    <div className="card-container" id="card" onClick={onClick}>
       <div className="image-wrapper">
         <div className="product-pic">
           <img className="product-img" src={product.imageUrl} alt="" />
