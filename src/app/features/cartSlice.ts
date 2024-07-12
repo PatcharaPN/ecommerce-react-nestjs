@@ -3,9 +3,11 @@ import { Product } from "./productSlice";
 
 export interface CartState {
   items: Product[];
+  totalItemCount: number;
 }
 const initialState: CartState = {
   items: [],
+  totalItemCount: 0,
 };
 
 const cartSlice = createSlice({
@@ -25,6 +27,7 @@ const cartSlice = createSlice({
         });
       }
     },
+
     removeItemFromCart: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter(
         (product) => product._id !== action.payload
@@ -35,6 +38,14 @@ const cartSlice = createSlice({
     },
   },
 });
+
+export const selectTotalItemCount = (state: { cart: CartState }) => {
+  let totalCount = 0;
+  state.cart.items.forEach((product) => {
+    totalCount += product.quantity;
+  });
+  return totalCount;
+};
 export const { addItemToCart, removeItemFromCart, clearCart } =
   cartSlice.actions;
 

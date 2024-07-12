@@ -14,6 +14,22 @@
 .cart-item-wrapper {
   display: flex;
 }
+.amount-items {
+  position: absolute;
+  top: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: #e65555;
+  width: 20px;
+  height: 20px;
+  padding: 10px;
+  font-size: 10px;
+  font-weight: bold;
+  border-radius: 50%;
+}
 .modal {
   width: 1500px;
   height: 1000px;

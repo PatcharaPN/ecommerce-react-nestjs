@@ -2,13 +2,17 @@ import { Icon } from "@iconify/react";
 import { useState } from "react";
 import "./cart.css";
 import Divider from "../divider";
-import { useDispatch, useSelector, UseSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
-import { removeItemFromCart } from "../../app/features/cartSlice";
+import {
+  removeItemFromCart,
+  selectTotalItemCount,
+} from "../../app/features/cartSlice";
 
 export const Cart: React.FC = () => {
   const [isopenCart, setisopenCart] = useState<boolean>(false);
   const cartItems = useSelector((state: RootState) => state.cart.items);
+  const itemCount = useSelector(selectTotalItemCount);
   const dispatch = useDispatch();
   console.log(cartItems);
 
@@ -35,6 +39,7 @@ export const Cart: React.FC = () => {
   return (
     <div className="cart-box">
       <div className="cart-btn" onClick={handleClickCart}>
+        <div className="amount-items">{itemCount}</div>
         <Icon className="icon" icon="mdi:cart-outline" />
       </div>
       {isopenCart && (
