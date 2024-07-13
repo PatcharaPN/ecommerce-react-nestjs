@@ -44,6 +44,10 @@
   padding: 15px 50px;
   font-size: 16px;
   cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+.shop-btn:hover {
+  transform: scale(105%);
 }
 .rating-section {
   display: flex;

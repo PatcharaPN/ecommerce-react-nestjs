@@ -1,11 +1,27 @@
 import { Icon } from "@iconify/react";
 import "./header.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Cart } from "./cart/cart";
 
+interface User {
+  email: number;
+  name: string;
+  username: string;
+  tel: number;
+  userImage: string;
+}
 const Header: React.FC = () => {
   const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false);
 
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const jsonData = localStorage.getItem("user");
+    if (jsonData) {
+      const parsedData: User = JSON.parse(jsonData);
+      setUser(parsedData);
+    }
+  }, []);
   const toggleDrawer = () => {
     console.log("clicked");
     setDrawerOpen(!isDrawerOpen);
@@ -31,7 +47,7 @@ const Header: React.FC = () => {
         <Icon className="icon" icon="majesticons:chat-line" />
         <Cart />
         <div className="user-con" onClick={toggleDrawer}>
-          PC
+          <img src={user?.userImage} width={40} height={40} alt="" />
         </div>
       </div>
       <div className={`drawer ${isDrawerOpen ? "open" : ""}`}>
@@ -40,9 +56,19 @@ const Header: React.FC = () => {
             <Icon icon="ep:close" />
           </div>
           <div className="user-container">
-            <div>Username</div>
-            <div>UID</div>
-            <div className="user-profile"></div>
+            <div className="username">
+              <div>{user ? user.username : "Guest"}</div>
+              <div>UID</div>
+            </div>
+            <div className="user-profile">
+              <img
+                className="user-img"
+                src={user?.userImage}
+                width={100}
+                height={100}
+                alt=""
+              />
+            </div>
           </div>
           <div className="drawer-menu">
             <ul className="list">

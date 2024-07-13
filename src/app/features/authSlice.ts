@@ -25,6 +25,10 @@ export const login = createAsyncThunk<
     email,
     password,
   });
+  const { user, accessToken } = response.data;
+  localStorage.setItem("user", JSON.stringify(user));
+  localStorage.setItem("accessToken", accessToken);
+
   return response.data;
 });
 
@@ -47,7 +51,7 @@ const authSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.user = null;
-      state.accessToken = null; // เมื่อ logout ให้เคลียร์ accessToken
+      state.accessToken = null;
     },
   },
   extraReducers: (builder) => {
@@ -56,9 +60,11 @@ const authSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(register.fulfilled, (state) => {
+      .addCase(register.fulfilled, (state, action: PayloadAction<any>) => {
         state.loading = true;
+        state.user = action.payload.user;
         state.error = null;
+        state.accessToken = action.payload.accessToken;
       })
       .addCase(register.rejected, (state, action) => {
         state.loading = false;

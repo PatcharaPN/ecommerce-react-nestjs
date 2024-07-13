@@ -8,6 +8,15 @@
   display: flex;
   align-items: center;
 }
+.user-img {
+  border-radius: 50px;
+  border: solid 2px black;
+}
+.user-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
 .user-con {
   display: flex;
   justify-content: center;
@@ -18,6 +27,11 @@
   height: 20px;
   padding: 20px;
   border-radius: 50px;
+  transition: 0.2s ease-in-out;
+}
+.user-con:hover {
+  cursor: pointer;
+  transform: scale(105%);
 }
 .logo {
   margin-right: 20px;
@@ -45,27 +59,37 @@
 }
 
 .drawer-menu {
-  height: 550px;
   display: flex;
-  justify-items: end;
+  flex-direction: column;
   justify-content: space-between;
+  height: 100%;
 }
+
 .logout {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
+  margin-top: auto;
 }
 .list {
-  li {
-    list-style: none;
-  }
+  list-style: none;
+  padding: 0;
+  font-weight: 500;
+  margin: 0;
 }
+
+.list li {
+  margin-bottom: 10px;
+}
+
 .logout-btn {
   padding: 10px;
   border-radius: 10px;
   border: none;
   background-color: #515151;
   color: #ffffff;
+  cursor: pointer;
 }
+
 .search-icon {
   position: absolute;
   top: 50%;
@@ -74,42 +98,44 @@
   pointer-events: none;
   color: #888;
 }
+
 .show-menu {
   font-size: 30px;
   display: none;
 }
 
 .drawer-content {
-  display: block;
+  display: flex;
+  flex-direction: column;
   padding: 20px;
+  height: 100%;
 }
+
 .close-drawer {
   display: flex;
   font-size: 30px;
   justify-content: flex-end;
   cursor: pointer;
 }
-.list {
-  margin-top: 30%;
-}
 
 .drawer {
   position: fixed;
-  top: 0px;
-  right: 0px;
-  margin-top: 10px;
+  top: 0;
+  right: 0;
   width: 250px;
-  height: 70%;
+  height: 100%;
   background-color: white;
   box-shadow: 1px 0 5px rgba(0, 0, 0, 0.5);
   transform: translateX(100%);
-  animation: bounceInRight 0.5s forwards;
+  transition: transform 0.3s ease;
   z-index: 1000;
+  overflow-y: auto; /* เพิ่มการเลื่อน */
 }
 
 .drawer.open {
   transform: translateX(0%);
 }
+
 @media (max-width: 480px) {
   .header-con {
     display: flex;
@@ -144,7 +170,6 @@
   .list li {
     font-size: 22px;
     list-style: none;
-
     margin-bottom: 5%;
   }
 }

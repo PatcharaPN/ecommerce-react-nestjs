@@ -54,7 +54,13 @@
   font-size: 24px;
   cursor: pointer;
 }
-
+.btn-remove {
+  transition: transform 0.3s ease-in-out;
+}
+.btn-remove:hover {
+  transform: scale(105%);
+  background-color: #a62f2f;
+}
 .cart-header {
   font-size: 20px;
   font-weight: bold;

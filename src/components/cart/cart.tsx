@@ -118,13 +118,10 @@ export const Cart: React.FC = () => {
                         <p>Total amount</p>
                       </div>
                       <div className="payment-section">
-                        <p>{"$"}0</p>
-                        <p>{"$"}0</p>
-                        <p>{"$"}0</p>
-                        <p>
-                          {"$"}
-                          {calculateTotalprice()}
-                        </p>
+                        <p>0฿</p>
+                        <p>0฿</p>
+                        <p>0฿</p>
+                        <p>{calculateTotalprice()}฿</p>
                       </div>
                     </div>
 
