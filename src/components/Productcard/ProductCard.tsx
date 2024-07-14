@@ -1,6 +1,6 @@
 import React from "react";
-import "./productCard.css";
-import RatingComponent from "../star rating/ratingstar";
+import "./ProductCard.css";
+import RatingComponent from "../Rating/ratingstar";
 import { Product } from "../../app/features/productSlice";
 
 interface ProductCardProps {

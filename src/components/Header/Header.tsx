@@ -1,10 +1,10 @@
 import { Icon } from "@iconify/react";
-import "./header.css";
+import "./Header.css";
 import { useEffect, useState } from "react";
-import { Cart } from "./cart/cart";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../app/store";
-import { getProducts } from "../app/features/productSlice";
+import { Cart } from "../Cart/cart";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../app/store";
+import { getProducts } from "../../app/features/productSlice";
 
 interface User {
   email: number;

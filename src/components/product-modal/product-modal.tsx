@@ -1,6 +1,6 @@
 import React from "react";
-import "./product-modal.css";
-import RatingComponent from "../star rating/ratingstar";
+import "./Product-modal.css";
+import RatingComponent from "../Rating/ratingstar";
 import { Icon } from "@iconify/react";
 import { Product } from "../../app/features/productSlice";
 import { useDispatch } from "react-redux";

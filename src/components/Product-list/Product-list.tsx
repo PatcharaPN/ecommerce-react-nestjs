@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect } from "react";
-import ProductCard from "./productCard";
 import { useState } from "react";
-import "./productList.css";
+import "./Product-list.css";
 import { useAppDispatch } from "../../app/store";
-import { ProductModal } from "../product-modal/product-modal";
+
 import { getProducts, Product } from "../../app/features/productSlice";
+import ProductCard from "../Productcard/ProductCard";
+import { ProductModal } from "../Product-modal/Product-modal";
 
 const ProductList: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product>();

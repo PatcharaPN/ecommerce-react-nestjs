@@ -1,4 +1,4 @@
-import "./sidebarRight.css";
+import "./Sidebar-right.css";
 import { Icon } from "@iconify/react";
 const SidebarRight = () => {
   return (

@@ -1,13 +1,13 @@
 import { Icon } from "@iconify/react";
 import { useState } from "react";
 import "./cart.css";
-import Divider from "../divider";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import {
   removeItemFromCart,
   selectTotalItemCount,
 } from "../../app/features/cartSlice";
+import Divider from "../Divider/Divider";
 
 export const Cart: React.FC = () => {
   const [isopenCart, setisopenCart] = useState<boolean>(false);

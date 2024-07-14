@@ -1,8 +1,7 @@
 import Banner from "./components/Banner/banner";
 import Categorymenu from "./components/Categorymenu/categorymenu";
-import NewProductList from "./components/Product card/newproductList";
-import Headermenu from "./components/headermenu/headermenu";
-import ProductList from "./components/Product card/productList";
+import Headermenu from "./components/Headermenu/headermenu";
+import ProductList from "./components/Product-list/Product-list";
 import { Footer } from "./components/Footer/footer";
 const App: React.FC = () => {
   return (
@@ -14,7 +13,6 @@ const App: React.FC = () => {
       />
       <Categorymenu />
       <Headermenu />
-      <NewProductList />
       <Banner
         LargeImage="https://static.vecteezy.com/system/resources/previews/002/006/614/non_2x/paper-art-shopping-online-on-smartphone-and-new-buy-sale-promotion-pink-backgroud-for-banner-market-ecommerce-free-vector.jpg"
         smallImagetop="https://www.shutterstock.com/image-vector/shopping-online-on-phone-podium-260nw-1886650081.jpg"

@@ -1,8 +1,8 @@
 import { Outlet, useLocation } from "react-router-dom";
-import Header from "./header";
-import SidebarLeft from "./SidebarFilter/sidebar";
-import "./layout.css";
-import SidebarRight from "./SidebarFilter/sidebarRight";
+import SidebarLeft from "../Sidebar-left/Sidebar-left";
+import "./Layout.css";
+import SidebarRight from "../Sidebar-right/Sidebar-right";
+import Header from "../Header/Header";
 
 const Layout = () => {
   const location = useLocation();
