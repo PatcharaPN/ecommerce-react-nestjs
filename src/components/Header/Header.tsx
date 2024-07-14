@@ -5,7 +5,8 @@ import { Cart } from "../Cart/cart";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../app/store";
 import { getProducts } from "../../app/features/productSlice";
-
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 interface User {
   email: number;
   name: string;
@@ -83,15 +84,27 @@ const Header: React.FC = () => {
           <div className="drawer-background">
             <div className="drawer-menu">
               <ul className="list">
+                <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+                  <div className="menu-list">
+                    <Icon icon="majesticons:home-line" />
+                    <li>Home</li>
+                  </div>
+                </Link>
+
                 <div className="menu-list">
                   <Icon icon="gg:profile" />
                   <li>Your Profile</li>
                 </div>
                 {user?.role === "merchant" ? (
-                  <div className="menu-list">
-                    <Icon icon="material-symbols:store-outline" />
-                    <li>Your Store</li>
-                  </div>
+                  <Link
+                    to="/store"
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    <div className="menu-list">
+                      <Icon icon="material-symbols:store-outline" />
+                      <li>Your Store</li>
+                    </div>
+                  </Link>
                 ) : null}
                 <div className="menu-list">
                   <Icon icon="material-symbols:favorite-outline" />
@@ -101,10 +114,14 @@ const Header: React.FC = () => {
             </div>
           </div>
           <div className="logout">
-            <button className="logout-btn" onClick={handleLogout}>
+            <motion.button
+              className="logout-btn"
+              onClick={handleLogout}
+              whileTap={{ scale: 0.9 }}
+            >
               <Icon icon="ic:round-logout" />
               Logout
-            </button>
+            </motion.button>
           </div>
         </div>
       </div>

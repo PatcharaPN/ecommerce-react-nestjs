@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./cart.css";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
+import { motion } from "framer-motion";
 import {
   removeItemFromCart,
   selectTotalItemCount,
@@ -126,7 +127,12 @@ export const Cart: React.FC = () => {
                     </div>
 
                     <div className="summary-content">
-                      <button className="checkout-btn">Checkout</button>
+                      <motion.button
+                        className="checkout-btn"
+                        whileTap={{ scale: 0.9 }}
+                      >
+                        Checkout
+                      </motion.button>
                       <input
                         className="promo-input"
                         type="text"

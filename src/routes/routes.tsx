@@ -1,10 +1,11 @@
 import { useRoutes } from "react-router-dom";
 
 import Layout from "../components/Layout/Layout";
-import { EditPage } from "../pages/editPage/editPage";
+
 import App from "../App";
 import LoginPage from "../pages/LoginPage/LoginPage";
-import ProtectedRoute from "./protectedRoute";
+import ProtectedRoute from "./ProtectedRoute";
+import StorePage from "../pages/StorePage/StorePage";
 
 const Routes = () => {
   const routes = useRoutes([
@@ -14,12 +15,12 @@ const Routes = () => {
       children: [{ path: "/", element: <ProtectedRoute element={<App />} /> }],
     },
     {
-      path: "/addproducts",
+      path: "/store",
       element: <Layout />,
       children: [
         {
-          path: "/addproducts",
-          element: <ProtectedRoute element={<EditPage />} />,
+          path: "/store",
+          element: <ProtectedRoute element={<StorePage />} />,
         },
       ],
     },

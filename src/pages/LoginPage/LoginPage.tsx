@@ -4,7 +4,7 @@ import { login, register } from "../../app/features/authSlice";
 import { RootState } from "../../app/store";
 import { useNavigate } from "react-router-dom";
 import "./LoginPage.css";
-
+import { motion } from "framer-motion";
 const LoginPage: React.FC = () => {
   const [switchForm, setswitchForm] = useState(false);
   const [email, setEmail] = useState("");
@@ -114,9 +114,15 @@ const LoginPage: React.FC = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
-                  <button className="btn" type="submit" disabled={loading}>
+                  <motion.button
+                    whileTap={{ scale: 0.9, color: "red" }}
+                    whileHover={{ scale: 1.1, backgroundColor: "black" }}
+                    className="btn"
+                    type="submit"
+                    disabled={loading}
+                  >
                     {loading ? "Loading..." : "Login"}
-                  </button>
+                  </motion.button>
                 </div>
               )}
               {error && <p className="error">{error}</p>}

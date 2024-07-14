@@ -1,0 +1,8 @@
+.store-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  margin: 20px 50px;
+}
+.store-description {
+}
