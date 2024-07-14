@@ -486,6 +486,11 @@
     proc-log "^4.0.0"
     which "^4.0.0"
 
+"@oven/bun-darwin-aarch64@1.1.20":
+  version "1.1.20"
+  resolved "https://registry.npmjs.org/@oven/bun-darwin-aarch64/-/bun-darwin-aarch64-1.1.20.tgz"
+  integrity sha512-9dZuhfkol/fgG9+ZcDfDFKamp6npraPQghutE5IJM8Y3w4+y5USvw+NbANuKLSLFOH06oXMT/necZ9HT0rzTlg==
+
 "@pkgjs/parseargs@^0.11.0":
   version "0.11.0"
 
@@ -875,6 +880,20 @@ browserslist@^4.22.2, "browserslist@>= 4.21.0":
     electron-to-chromium "^1.4.796"
     node-releases "^2.0.14"
     update-browserslist-db "^1.0.16"
+
+bun@^1.1.20:
+  version "1.1.20"
+  resolved "https://registry.npmjs.org/bun/-/bun-1.1.20.tgz"
+  integrity sha512-aqLmvaz0/vLUiCrOXtAsf7pCSOS/qXieYDsq8COa3+fIgMK05CjZt9m9r7DC+tjKy7hH8uKSNTapQOr/kX8gIA==
+  optionalDependencies:
+    "@oven/bun-darwin-aarch64" "1.1.20"
+    "@oven/bun-darwin-x64" "1.1.20"
+    "@oven/bun-darwin-x64-baseline" "1.1.20"
+    "@oven/bun-linux-aarch64" "1.1.20"
+    "@oven/bun-linux-x64" "1.1.20"
+    "@oven/bun-linux-x64-baseline" "1.1.20"
+    "@oven/bun-windows-x64" "1.1.20"
+    "@oven/bun-windows-x64-baseline" "1.1.20"
 
 cacache@^18.0.0, cacache@^18.0.3:
   version "18.0.3"

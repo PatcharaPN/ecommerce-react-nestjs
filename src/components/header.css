@@ -17,6 +17,7 @@
   justify-content: space-between;
   margin-bottom: 40px;
 }
+
 .user-con {
   display: flex;
   justify-content: center;
@@ -29,6 +30,11 @@
   border-radius: 50px;
   transition: 0.2s ease-in-out;
 }
+.menu-list:hover {
+  cursor: pointer;
+  color: #ffffff;
+  background-color: #1f1f1f8f;
+}
 .user-con:hover {
   cursor: pointer;
   transform: scale(105%);
@@ -38,24 +44,9 @@
   font-size: 30px;
 }
 
-.search-bar {
-  flex-grow: 1;
-  margin: 0 40px;
-}
-
-.search-container {
-  position: relative;
-}
 .icon {
   font-size: 35px;
   margin-right: 20px;
-}
-.searchbar {
-  width: 100%;
-  padding: 5px 5px 5px 30px; /* Adjust padding to make space for the icon */
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  background-color: rgba(128, 128, 128, 0.326);
 }
 
 .drawer-menu {
@@ -77,26 +68,33 @@
   margin: 0;
 }
 
-.list li {
-  margin-bottom: 10px;
+.menu-list {
+  display: flex;
+  gap: 20px;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 10px;
+  transition: 0.2s ease-in-out;
 }
-
+.logout Icon {
+  font-weight: bold;
+}
 .logout-btn {
+  display: flex;
+  gap: 10px;
+  font-weight: bold;
+  align-items: center;
   padding: 10px;
   border-radius: 10px;
   border: none;
   background-color: #515151;
   color: #ffffff;
   cursor: pointer;
+  transition: 0.2s ease-in-out;
 }
-
-.search-icon {
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  transform: translateY(-50%);
-  pointer-events: none;
-  color: #888;
+.logout-btn:hover {
+  background-color: #a62f2f;
+  transform: scale(105%);
 }
 
 .show-menu {
@@ -122,16 +120,36 @@
   position: fixed;
   top: 0;
   right: 0;
-  width: 250px;
+  width: 300px;
   height: 100%;
   background-color: white;
   box-shadow: 1px 0 5px rgba(0, 0, 0, 0.5);
   transform: translateX(100%);
-  transition: transform 0.3s ease;
+  transition: transform 0.1s ease;
   z-index: 1000;
   overflow-y: auto; /* เพิ่มการเลื่อน */
 }
-
+.username {
+  margin-left: 10px;
+}
+.close-icon {
+  border-radius: 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.username .name {
+  font-weight: bold;
+}
+.menu-list {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+.menu-list li {
+  display: flex;
+  align-items: center;
+  justify-content: safe;
+}
 .drawer.open {
   transform: translateX(0%);
 }
@@ -157,13 +175,7 @@
     justify-content: center;
     align-items: center;
   }
-  .searchbar {
-    width: 90%;
-    padding: 10px 10px 10px 30px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    background-color: rgba(128, 128, 128, 0.326);
-  }
+
   .list {
     margin-top: 30%;
   }

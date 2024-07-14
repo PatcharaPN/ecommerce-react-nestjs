@@ -2,16 +2,25 @@ import { Icon } from "@iconify/react";
 import "./header.css";
 import { useEffect, useState } from "react";
 import { Cart } from "./cart/cart";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../app/store";
+import { getProducts } from "../app/features/productSlice";
 
 interface User {
   email: number;
   name: string;
   username: string;
+  role: string;
   tel: number;
   userImage: string;
 }
 const Header: React.FC = () => {
+  const dispatch: AppDispatch = useDispatch();
   const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
 
   const [user, setUser] = useState<User | null>(null);
 
@@ -37,12 +46,8 @@ const Header: React.FC = () => {
       <div className="logo">
         <Icon icon="solar:figma-outline" />
       </div>
-      <div className="search-bar">
-        <div className="search-container">
-          <input className="searchbar" type="text" placeholder="Search" />
-          <Icon icon="ic:baseline-search" className="search-icon" />
-        </div>
-      </div>
+      <div className="search-bar"></div>
+
       <div className="menu">
         <Icon className="icon" icon="majesticons:chat-line" />
         <Cart />
@@ -53,12 +58,17 @@ const Header: React.FC = () => {
       <div className={`drawer ${isDrawerOpen ? "open" : ""}`}>
         <div className="drawer-content">
           <div className="close-drawer" onClick={toggleDrawer}>
-            <Icon icon="ep:close" />
+            <Icon
+              icon="ep:close"
+              className="close-icon"
+              width={20}
+              height={20}
+            />
           </div>
           <div className="user-container">
             <div className="username">
-              <div>{user ? user.username : "Guest"}</div>
-              <div>UID</div>
+              <div className="name">{user ? user.username : "Guest"}</div>
+              <div>{user?.role}</div>
             </div>
             <div className="user-profile">
               <img
@@ -70,17 +80,29 @@ const Header: React.FC = () => {
               />
             </div>
           </div>
-          <div className="drawer-menu">
-            <ul className="list">
-              <li>Profile</li>
-              <li>Favorite</li>
-              <li>My Addresses</li>
-              <li>Bank Accounts</li>
-              <li>Help Centre</li>
-            </ul>
+          <div className="drawer-background">
+            <div className="drawer-menu">
+              <ul className="list">
+                <div className="menu-list">
+                  <Icon icon="gg:profile" />
+                  <li>Your Profile</li>
+                </div>
+                {user?.role === "merchant" ? (
+                  <div className="menu-list">
+                    <Icon icon="material-symbols:store-outline" />
+                    <li>Your Store</li>
+                  </div>
+                ) : null}
+                <div className="menu-list">
+                  <Icon icon="material-symbols:favorite-outline" />
+                  <li>Favorite</li>
+                </div>
+              </ul>
+            </div>
           </div>
           <div className="logout">
             <button className="logout-btn" onClick={handleLogout}>
+              <Icon icon="ic:round-logout" />
               Logout
             </button>
           </div>
