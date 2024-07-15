@@ -10,7 +10,7 @@ export interface AuthState {
 }
 
 const initialState: AuthState = {
-  user: null,
+  user: JSON.parse(localStorage.getItem("user") || "null"),
   loading: false,
   error: null,
   accessToken: null,
@@ -87,4 +87,5 @@ const authSlice = createSlice({
 });
 
 export const { logout } = authSlice.actions;
+export const selectUser = (state: RootState) => state.auth.user;
 export default authSlice.reducer;

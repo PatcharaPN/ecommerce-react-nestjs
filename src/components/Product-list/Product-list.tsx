@@ -1,23 +1,33 @@
-import React, { useCallback, useEffect } from "react";
-import { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "./Product-list.css";
-import { useAppDispatch } from "../../app/store";
+import { useAppDispatch, useAppSelector } from "../../app/store";
 
-import { getProducts, Product } from "../../app/features/productSlice";
+import {
+  getProducts,
+  getStores,
+  Product,
+} from "../../app/features/productSlice";
 import ProductCard from "../Productcard/ProductCard";
 import { ProductModal } from "../Product-modal/Product-modal";
 
 const ProductList: React.FC = () => {
-  const [selectedProduct, setSelectedProduct] = useState<Product>();
-  const [products, setProducts] = useState<Product[]>([]);
+  const [selectedProduct, setSelectedProduct] = useState<Product | undefined>();
+  const products = useAppSelector((state) => state.product.products);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
 
   const fetchProducts = useCallback(async () => {
     try {
-      const response = await dispatch(getProducts()).unwrap();
-      setProducts(response);
+      await dispatch(getProducts());
+    } catch (error) {
+      console.error(error);
+    }
+  }, [dispatch]);
+
+  const fetchStores = useCallback(async () => {
+    try {
+      await dispatch(getStores());
     } catch (error) {
       console.error(error);
     }
@@ -25,12 +35,11 @@ const ProductList: React.FC = () => {
 
   useEffect(() => {
     fetchProducts();
-  }, [fetchProducts]);
+    fetchStores();
+  }, [fetchProducts, fetchStores]);
 
   const handleProductClick = (product: Product) => {
     setSelectedProduct(product);
-    console.log(selectedProduct);
-
     setIsModalOpen(true);
   };
 
@@ -56,6 +65,7 @@ const ProductList: React.FC = () => {
           )}
           {isModalOpen && selectedProduct && (
             <ProductModal
+              store={selectedProduct.store}
               product={selectedProduct}
               closeModal={handleModalClose}
             />

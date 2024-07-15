@@ -85,7 +85,7 @@ const Header: React.FC = () => {
             <div className="drawer-menu">
               <ul className="list">
                 <Link to="/" style={{ textDecoration: "none", color: "black" }}>
-                  <div className="menu-list">
+                  <div className="menu-list" onClick={toggleDrawer}>
                     <Icon icon="majesticons:home-line" />
                     <li>Home</li>
                   </div>
@@ -100,7 +100,7 @@ const Header: React.FC = () => {
                     to="/store"
                     style={{ textDecoration: "none", color: "black" }}
                   >
-                    <div className="menu-list">
+                    <div className="menu-list" onClick={toggleDrawer}>
                       <Icon icon="material-symbols:store-outline" />
                       <li>Your Store</li>
                     </div>

@@ -1,4 +1,3 @@
-import React from "react";
 import "./Store-Description.css";
 const StoreDescription = () => {
   return (

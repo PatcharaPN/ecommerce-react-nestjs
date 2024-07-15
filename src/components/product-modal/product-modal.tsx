@@ -2,17 +2,19 @@ import React from "react";
 import "./Product-modal.css";
 import RatingComponent from "../Rating/ratingstar";
 import { Icon } from "@iconify/react";
-import { Product } from "../../app/features/productSlice";
+import { Product, Store } from "../../app/features/productSlice";
 import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../app/features/cartSlice";
 
 interface ProductModalProps {
   product?: Product;
+  store: Store;
   closeModal: () => void;
 }
 
 export const ProductModal: React.FC<ProductModalProps> = ({
   product,
+  store,
   closeModal,
 }) => {
   const dispatch = useDispatch();
@@ -77,7 +79,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
             <div className="shop-picture"></div>
             <div className="shop-information">
               <div className="shop-desc">
-                <p className="shop-info name ">Somchai Shop</p>
+                <p className="shop-info name ">{store.name}</p>
                 <p className="shop-info desc">Shop Description</p>
                 <div className="follower-section">
                   <p className="shop-info follower">Follower</p>

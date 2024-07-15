@@ -10,7 +10,6 @@ const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [registerEmail, setRegisterEmail] = useState("");
   const dispatch = useDispatch();
   const { loading, error } = useSelector((state: RootState) => state.auth);
   const navigate = useNavigate();
