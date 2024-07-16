@@ -25,3 +25,27 @@ nav > p {
     display: none;
   }
 }
+@media only screen and (min-width: 600px) and (max-width: 899px) {
+  .sidebar-left {
+    display: none;
+  }
+  .sidebar-right {
+    display: none;
+  }
+}
+@media only screen and (min-width: 900px) and (max-width: 1199px) {
+  .sidebar-left {
+    display: none;
+  }
+  .sidebar-right {
+    display: none;
+  }
+}
+@media only screen and (max-width: 599px) {
+  .sidebar-left {
+    display: none;
+  }
+  .sidebar-right {
+    display: none;
+  }
+}
