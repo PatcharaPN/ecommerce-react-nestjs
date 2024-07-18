@@ -12,6 +12,7 @@
 
 .store-product-list-wrapper {
   padding: 0 60px;
+  align-items: center;
   width: 100%;
   display: flex;
   justify-content: start;
@@ -30,19 +31,22 @@
   animation: spin 1s linear infinite;
   margin: 20px auto;
 }
+.create-product {
+  height: 100%;
+  align-items: center;
+}
+.create-product-button {
+  margin-left: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 60%;
+  padding: 20px;
+}
 @keyframes spin {
   to {
     transform: rotate(360deg);
   }
-}
-
-.product-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 0px;
-  max-width: 85%;
-  padding: auto;
 }
 
 .product-card {

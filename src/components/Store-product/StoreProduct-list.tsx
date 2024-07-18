@@ -6,10 +6,13 @@ import ProductCard from "../Productcard/ProductCard";
 import { ProductModal } from "../Product-modal/Product-modal";
 import { selectUser } from "../../app/features/authSlice";
 import { selectLoading } from "../../app/features/productSlice";
+import { Icon } from "@iconify/react";
+import { motion } from "framer-motion";
 
 const StoreProductList: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | undefined>();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [createProduct, setCreateProduct] = useState<boolean>(false);
   const user = useAppSelector(selectUser);
   const products = useAppSelector(selectProducts);
   const loading = useAppSelector(selectLoading);
@@ -24,9 +27,12 @@ const StoreProductList: React.FC = () => {
   };
 
   const handleModalClose = () => {
-    setIsModalOpen(false);
+    setIsModalOpen(true);
   };
 
+  const handleCreateProduct = () => {
+    console.log("create product");
+  };
   return (
     <div className="product-list-container">
       <div className="filter-products"></div>
@@ -51,6 +57,14 @@ const StoreProductList: React.FC = () => {
             closeModal={handleModalClose}
           />
         )}
+        <div className="create-product">
+          <button
+            onClick={handleCreateProduct}
+            className="create-product-button"
+          >
+            <Icon icon="carbon:add" />
+          </button>
+        </div>
       </div>
     </div>
   );

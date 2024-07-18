@@ -19,28 +19,30 @@
 .product-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 0px;
   max-width: 85%;
   padding: auto;
 }
 
-.product-card {
-  flex: 1 1 calc(25% - 20px);
-  max-width: calc(25% - 20px);
-  box-sizing: border-box;
-}
-
 @media (max-width: 768px) {
-  .product-card {
-    flex: 1 1 calc(50% - 20px);
-    max-width: calc(50% - 20px);
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0px;
+    max-width: 85%;
+    padding: auto;
   }
 }
 
 @media (max-width: 480px) {
-  .product-card {
-    flex: 1 1 100%;
-    max-width: 100%;
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0px;
+    max-width: 85%;
+    padding: auto;
   }
 }

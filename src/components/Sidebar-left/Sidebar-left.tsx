@@ -1,5 +1,5 @@
 import "./Sidebar-left.css";
-
+import { color, motion } from "framer-motion";
 const SidebarLeft = () => {
   return (
     <aside className="sidebar-left">
