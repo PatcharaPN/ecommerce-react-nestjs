@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import axios from "axios";
 import { AsyncThunk } from "@reduxjs/toolkit";
+import { FormValues } from "../../types/types";
 
 export interface Product {
   _id: string;
@@ -26,13 +27,15 @@ export interface Store {
 export interface ProductState {
   products: Product[];
   stores: Store[];
-  loading: boolean; // Add loading state
+  loading: boolean;
+  error: string | null;
 }
 
 const initialState: ProductState = {
   products: [],
   stores: [],
-  loading: false, // Initialize loading state
+  loading: false,
+  error: null,
 };
 
 export const getProducts: AsyncThunk<Product[], void, any> = createAsyncThunk(
@@ -40,6 +43,23 @@ export const getProducts: AsyncThunk<Product[], void, any> = createAsyncThunk(
   async (): Promise<Product[]> => {
     const { data: res } = await axios.get<Product[]>(
       "http://localhost:3000/products"
+    );
+    return res;
+  }
+);
+export const submitProduct: AsyncThunk<any, any, any> = createAsyncThunk(
+  "products/submitProduct",
+  async (formValue: FormValues) => {
+    const formData = new FormData();
+    formData.append("name", formValue.name);
+    formData.append("description", formValue.description);
+    formData.append("price", formValue.price.toString());
+    formData.append("quantity", formValue.quantity.toString());
+    formData.append("imageUrl", formValue.file!);
+    formData.append("store", formValue.store);
+    const { data: res } = await axios.post<Product>(
+      "http://localhost:3000/products",
+      formData
     );
     return res;
   }
@@ -110,6 +130,17 @@ const productSlice = createSlice({
       })
       .addCase(getProductsByStoreId.rejected, (state) => {
         state.loading = false;
+      })
+      .addCase(submitProduct.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(submitProduct.fulfilled, (state, action) => {
+        state.loading = false;
+        state.products.push(action.payload);
+      })
+      .addCase(submitProduct.rejected, (state) => {
+        state.loading = false;
+        state.error = "Error submitting product";
       });
   },
 });

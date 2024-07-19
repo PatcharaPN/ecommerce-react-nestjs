@@ -15,6 +15,7 @@
   align-items: center;
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: start;
 }
 .loading {

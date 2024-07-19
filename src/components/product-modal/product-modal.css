@@ -173,3 +173,51 @@
   background-color: rgba(118, 118, 118, 0.527);
   z-index: 1000;
 }
+.createproduct-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: fadeIn 0.5s;
+  background: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
+}
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: fadeIn 0.1s;
+  background-color: white;
+  width: 1000px;
+  height: 800px;
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.close-btn {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 30px;
+  cursor: pointer;
+}
+.create-product-grid {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.create-btn {
+  padding: 10px;
+}
+.import-image {
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
