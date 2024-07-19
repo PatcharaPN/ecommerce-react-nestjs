@@ -9,7 +9,32 @@
   width: 100%;
   margin-bottom: 20px;
 }
+.create-product-form {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
 
+  input {
+    padding: 15px;
+    border-radius: 10px;
+    border: solid 1px #ccc;
+  }
+}
+.product-preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.submit-button > button {
+  border: none;
+  border-radius: 20px;
+  width: 100%;
+  padding: 20px;
+}
 .store-product-list-wrapper {
   padding: 0 60px;
   align-items: center;

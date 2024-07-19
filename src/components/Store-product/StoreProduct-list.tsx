@@ -108,16 +108,19 @@ const StoreProductList: React.FC = () => {
               <div className="product-image-import">
                 <input type="file" src="" alt="" onChange={handleChange} />
                 {formValues.file && (
-                  <img
-                    width={600}
-                    src={formValues.file}
-                    alt="Uploaded file preview"
-                  />
+                  <div className="product-preview">
+                    <p>Preview</p>
+                    <img
+                      width={400}
+                      src={formValues.file}
+                      alt="Uploaded file preview"
+                    />
+                  </div>
                 )}
               </div>
               <div className="create-product-form">
                 <form action="" onSubmit={handleSubmit}>
-                  <div>
+                  <div className="create-product-form">
                     Product name{" "}
                     <input
                       type="name"
@@ -127,7 +130,7 @@ const StoreProductList: React.FC = () => {
                       onChange={handleInputChange}
                     />
                   </div>
-                  <div>
+                  <div className="create-product-form">
                     Product description
                     <input
                       type="text"
@@ -137,7 +140,7 @@ const StoreProductList: React.FC = () => {
                       onChange={handleInputChange}
                     />
                   </div>
-                  <div>
+                  <div className="create-product-form">
                     Product description
                     <input
                       type="number"
@@ -147,7 +150,7 @@ const StoreProductList: React.FC = () => {
                       onChange={handleInputChange}
                     />
                   </div>
-                  <div>
+                  <div className="create-product-form">
                     Product Quantity
                     <input
                       type="number"
@@ -157,7 +160,7 @@ const StoreProductList: React.FC = () => {
                       onChange={handleInputChange}
                     />
                   </div>
-                  <div>
+                  <div className="submit-button">
                     <button
                       className="create-btn"
                       onClick={() => setOpenModal(false)}
