@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./StoreProduct-list.css";
 import { useAppDispatch, useAppSelector } from "../../app/store";
 import {
@@ -18,10 +18,12 @@ const StoreProductList: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | undefined>();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [storeId, setStoreId] = useState("");
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
   const products = useAppSelector(selectProducts);
   const loading = useAppSelector(selectLoading);
+
   const [file, setFile] = useState<File | null>(null);
   const [formValues, setFormValues] = useState<FormValues>({
     name: "",
@@ -29,9 +31,14 @@ const StoreProductList: React.FC = () => {
     price: 0,
     quantity: 0,
     file: null,
-    store: "",
+    store: storeId,
   });
-
+  useEffect(() => {
+    const getStore = localStorage.getItem("user");
+    if (getStore) {
+      setStoreId(JSON.parse(getStore).store._id);
+    }
+  }, []);
   const filteredProducts = Array.isArray(products)
     ? products.filter((product) => product.store._id === user?.store?._id)
     : [];
@@ -49,13 +56,14 @@ const StoreProductList: React.FC = () => {
     setFormValues({
       ...formValues,
       [name]: value,
+      store: storeId,
     });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formValues);
     dispatch(submitProduct(formValues));
+    console.log(formValues);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> | any) => {
@@ -63,7 +71,7 @@ const StoreProductList: React.FC = () => {
     setFormValues({
       ...formValues,
       file: URL.createObjectURL(e.target.files[0]),
-      store: user?.store?._id,
+      store: storeId,
     });
     console.log(file);
   };

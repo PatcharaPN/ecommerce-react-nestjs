@@ -1,5 +1,5 @@
 import React from "react";
-import "./Product-modal.css";
+import "./product-modal.css";
 import RatingComponent from "../Rating/ratingstar";
 import { Icon } from "@iconify/react";
 import { Product, Store } from "../../app/features/productSlice";

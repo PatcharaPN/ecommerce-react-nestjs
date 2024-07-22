@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import axios from "axios";
 import { AsyncThunk } from "@reduxjs/toolkit";
-import { FormValues } from "../../types/types";
+import { CreateStore, FormValues } from "../../types/types";
 
 export interface Product {
   _id: string;
@@ -14,7 +14,12 @@ export interface Product {
   quantity: number;
   store: Store;
 }
-
+interface CreateStoreArgs {
+  name: string;
+  description: string;
+  location: string;
+  owner: string;
+}
 export interface Store {
   _id: string;
   name: string;
@@ -72,6 +77,16 @@ export const getStores: AsyncThunk<Store[], void, any> = createAsyncThunk(
       "http://localhost:3000/stores"
     );
     return res;
+  }
+);
+export const createStore = createAsyncThunk<Store, CreateStoreArgs, any>(
+  "store/createStore",
+  async (args) => {
+    const { data } = await axios.post<Store>(
+      "http://localhost:3000/stores",
+      args
+    );
+    return data;
   }
 );
 
@@ -141,6 +156,17 @@ const productSlice = createSlice({
       .addCase(submitProduct.rejected, (state) => {
         state.loading = false;
         state.error = "Error submitting product";
+      })
+      .addCase(createStore.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(createStore.fulfilled, (state, action) => {
+        state.loading = false;
+        state.stores.push(action.payload);
+      })
+      .addCase(createStore.rejected, (state) => {
+        state.loading = false;
+        state.error = "Error creating store";
       });
   },
 });
