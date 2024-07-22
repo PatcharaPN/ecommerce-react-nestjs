@@ -22,7 +22,7 @@
   position: relative;
 }
 .delete-btn {
-  z-index: 1;
+  z-index: 0;
   top: 20px;
   right: 20px;
   color: #ffffff;
@@ -34,6 +34,7 @@
 }
 
 .modal-content-product {
+  z-index: 1000;
   width: 100%;
   position: absolute;
   top: 50%;

@@ -7,6 +7,7 @@ import { AppDispatch } from "../../app/store";
 import { getProducts } from "../../app/features/productSlice";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import ProfileModal from "../Profile-edit/userProfile";
 interface User {
   email: number;
   name: string;
@@ -18,6 +19,7 @@ interface User {
 const Header: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false);
+  const [ModalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     dispatch(getProducts());
@@ -37,6 +39,10 @@ const Header: React.FC = () => {
     setDrawerOpen(!isDrawerOpen);
   };
 
+  const toggleModal = () => {
+    setModalOpen(true);
+    setDrawerOpen(false);
+  };
   const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.reload();
@@ -44,11 +50,12 @@ const Header: React.FC = () => {
 
   return (
     <div className="header-con">
+      {" "}
+      <ProfileModal isOpen={ModalOpen} onClose={() => setModalOpen(false)} />
       <div className="logo">
         <Icon icon="solar:figma-outline" />
       </div>
       <div className="search-bar"></div>
-
       <div className="menu">
         <Icon className="icon" icon="majesticons:chat-line" />
         <Cart />
@@ -72,7 +79,13 @@ const Header: React.FC = () => {
               <div>{user?.role}</div>
             </div>
             <div className="user-profile">
-              <img
+              <motion.img
+                onClick={toggleModal}
+                whileHover={{
+                  scale: 1.1,
+                  backgroundColor: "black",
+                  opacity: 0.5,
+                }}
                 className="user-img"
                 src={user?.userImage}
                 width={100}
