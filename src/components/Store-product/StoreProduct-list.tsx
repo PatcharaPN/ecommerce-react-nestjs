@@ -84,12 +84,30 @@ const StoreProductList: React.FC = () => {
         ) : filteredProducts.length === 0 ? (
           <div>Products not found</div>
         ) : (
-          filteredProducts.map((product, index) => (
-            <ProductCard
-              key={index}
-              product={product}
-              onClick={() => handleProductClick(product)}
-            />
+          filteredProducts.map((product) => (
+            <motion.div
+              whileHover={{
+                scale: 1.05,
+              }}
+            >
+              <div className="product-delete-btn">
+                <motion.button
+                  whileHover={{
+                    scale: 1.05,
+                    backgroundColor: "#C94242",
+                    transition: { duration: 0.2 },
+                  }}
+                  className="delete-btn"
+                >
+                  Delete
+                </motion.button>
+                <ProductCard
+                  key={product._id}
+                  product={product}
+                  onClick={() => handleProductClick(product)}
+                />
+              </div>
+            </motion.div>
           ))
         )}
         {isModalOpen && selectedProduct && (
@@ -108,7 +126,7 @@ const StoreProductList: React.FC = () => {
           </button>
         </div>
         <dialog open={openModal} className="createproduct-modal">
-          <div className="modal-content">
+          <div className="modal-content-product">
             <div className="close-btn" onClick={() => setOpenModal(false)}>
               <Icon icon="material-symbols:close" />
             </div>

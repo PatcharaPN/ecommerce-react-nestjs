@@ -15,13 +15,24 @@ const StoreProfile: React.FC = () => {
   const [store, setStore] = useState<Store | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const loadStorageData = () => {
     const getStore = localStorage.getItem("user");
     if (getStore) {
       const parsedData = JSON.parse(getStore).store;
       setStore(parsedData);
       setLoading(false);
     }
+  };
+
+  useEffect(() => {
+    loadStorageData();
+    const handleStorageChange = () => {
+      loadStorageData();
+    };
+    window.addEventListener("storage", loadStorageData);
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
   }, []);
 
   if (loading) {

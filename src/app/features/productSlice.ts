@@ -70,6 +70,15 @@ export const submitProduct: AsyncThunk<any, any, any> = createAsyncThunk(
   }
 );
 
+export const deleteProduct = createAsyncThunk<Product, string, any>(
+  "product/deleteProduct",
+  async (id: string): Promise<Product> => {
+    const { data: res } = await axios.delete<Product>(
+      `http://localhost:3000/products/${id}`
+    );
+    return res;
+  }
+);
 export const getStores: AsyncThunk<Store[], void, any> = createAsyncThunk(
   "product/getStores",
   async (): Promise<Store[]> => {

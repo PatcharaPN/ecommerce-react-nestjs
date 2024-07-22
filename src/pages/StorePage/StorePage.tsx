@@ -139,9 +139,29 @@ function StorePage({}: Props) {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(createStore(formData));
+    try {
+      const resultAction = await dispatch(createStore(formData)).unwrap();
+
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        const userData = JSON.parse(storedUser);
+
+        const updatedStores = [...userData.store, resultAction];
+
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            ...userData,
+            store: updatedStores,
+          })
+        );
+      }
+      setOpenModal(false);
+    } catch (error) {
+      console.error("Error creating store:", error);
+    }
   };
 
   const filteredProvinces = provinces.filter((province) =>

@@ -15,9 +15,7 @@
   width: 150px;
   height: auto;
 }
-.card-container:hover {
-  transform: scale(105%);
-}
+
 .product-name {
   font-weight: bold;
   margin-top: 10px;

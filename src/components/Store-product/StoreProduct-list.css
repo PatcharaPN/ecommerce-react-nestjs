@@ -18,6 +18,36 @@
   padding: 20px;
   height: 100%;
 }
+.product-delete-btn {
+  position: relative;
+}
+.delete-btn {
+  z-index: 999;
+  top: 20px;
+  right: 20px;
+  color: #ffffff;
+  border: none;
+  background-color: #e65555;
+  padding: 7px;
+  border-radius: 10px;
+  position: absolute;
+}
+
+.modal-content-product {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: fadeIn 0.1s;
+  background-color: white;
+  width: 1000px;
+  height: 800px;
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
 .form-input {
   padding: 10px;
   border-radius: 10px;
