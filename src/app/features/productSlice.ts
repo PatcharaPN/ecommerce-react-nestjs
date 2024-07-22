@@ -52,21 +52,23 @@ export const getProducts: AsyncThunk<Product[], void, any> = createAsyncThunk(
     return res;
   }
 );
-export const submitProduct: AsyncThunk<any, any, any> = createAsyncThunk(
+export const submitProduct = createAsyncThunk<any, any, any>(
   "products/submitProduct",
-  async (formValue: FormValues) => {
-    const formData = new FormData();
-    formData.append("name", formValue.name);
-    formData.append("description", formValue.description);
-    formData.append("price", formValue.price.toString());
-    formData.append("quantity", formValue.quantity.toString());
-    formData.append("imageUrl", formValue.file!);
-    formData.append("store", formValue.store);
-    const { data: res } = await axios.post<Product>(
-      "http://localhost:3000/products",
-      formData
-    );
-    return res;
+  async (formData: FormData) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/products",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return Error("Something went wrong");
+    }
   }
 );
 
@@ -176,6 +178,19 @@ const productSlice = createSlice({
       .addCase(createStore.rejected, (state) => {
         state.loading = false;
         state.error = "Error creating store";
+      })
+      .addCase(deleteProduct.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deleteProduct.fulfilled, (state, action) => {
+        state.loading = false;
+        state.products = state.products.filter(
+          (product) => product._id !== action.payload._id
+        );
+      })
+      .addCase(deleteProduct.rejected, (state) => {
+        state.loading = false;
+        state.error = "Error deleting product";
       });
   },
 });

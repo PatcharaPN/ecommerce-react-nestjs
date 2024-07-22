@@ -22,7 +22,7 @@
   position: relative;
 }
 .delete-btn {
-  z-index: 999;
+  z-index: 1;
   top: 20px;
   right: 20px;
   color: #ffffff;

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./StoreProduct-list.css";
 import { useAppDispatch, useAppSelector } from "../../app/store";
 import {
+  deleteProduct,
   Product,
   selectProducts,
   submitProduct,
@@ -33,15 +34,22 @@ const StoreProductList: React.FC = () => {
     file: null,
     store: storeId,
   });
+  const [localProducts, setLocalProducts] = useState<Product[]>([]);
+
   useEffect(() => {
     const getStore = localStorage.getItem("user");
     if (getStore) {
       setStoreId(JSON.parse(getStore).store._id);
     }
   }, []);
-  const filteredProducts = Array.isArray(products)
-    ? products.filter((product) => product.store._id === user?.store?._id)
-    : [];
+
+  useEffect(() => {
+    setLocalProducts(
+      Array.isArray(products)
+        ? products.filter((product) => product.store?._id === user?.store?._id)
+        : []
+    );
+  }, [products, user]);
 
   const handleProductClick = (product: Product) => {
     setSelectedProduct(product);
@@ -51,6 +59,7 @@ const StoreProductList: React.FC = () => {
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormValues({
@@ -62,33 +71,67 @@ const StoreProductList: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(submitProduct(formValues));
+    const formData = new FormData();
+    formData.append("name", formValues.name);
+    formData.append("description", formValues.description);
+    formData.append("price", formValues.price.toString());
+    formData.append("quantity", formValues.quantity.toString());
+    formData.append("store", formValues.store);
+    if (file) {
+      formData.append("image", file);
+    }
+
+    dispatch(submitProduct(formData))
+      .unwrap()
+      .then((newProduct: Product) => {
+        if (newProduct.store) {
+          setLocalProducts([...localProducts, newProduct]);
+        } else {
+          console.error("New product does not have a store field.");
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to submit product:", error);
+      });
+
     console.log(formValues);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement> | any) => {
-    console.log(e.target.files);
-    setFormValues({
-      ...formValues,
-      file: URL.createObjectURL(e.target.files[0]),
-      store: storeId,
-    });
-    console.log(file);
+  const handleDelete = (id: string) => {
+    dispatch(deleteProduct(id))
+      .unwrap()
+      .then(() => {
+        setLocalProducts(localProducts.filter((product) => product._id !== id));
+      });
   };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+      setFormValues({
+        ...formValues,
+        file: URL.createObjectURL(selectedFile),
+        store: storeId,
+      });
+    }
+  };
+
   return (
     <div className="product-list-container">
       <div className="filter-products"></div>
       <div className="store-product-list-wrapper">
         {loading ? (
           <div className="spinner"></div>
-        ) : filteredProducts.length === 0 ? (
+        ) : localProducts.length === 0 ? (
           <div>Products not found</div>
         ) : (
-          filteredProducts.map((product) => (
+          localProducts.map((product) => (
             <motion.div
               whileHover={{
                 scale: 1.05,
               }}
+              key={product._id}
             >
               <div className="product-delete-btn">
                 <motion.button
@@ -98,11 +141,11 @@ const StoreProductList: React.FC = () => {
                     transition: { duration: 0.2 },
                   }}
                   className="delete-btn"
+                  onClick={() => handleDelete(product._id)}
                 >
                   Delete
                 </motion.button>
                 <ProductCard
-                  key={product._id}
                   product={product}
                   onClick={() => handleProductClick(product)}
                 />
@@ -132,7 +175,7 @@ const StoreProductList: React.FC = () => {
             </div>
             <div className="create-product-grid">
               <div className="product-image-import">
-                <input type="file" src="" alt="" onChange={handleChange} />
+                <input type="file" onChange={handleChange} />
                 {formValues.file && (
                   <div className="product-preview">
                     <p>Preview</p>
@@ -145,11 +188,11 @@ const StoreProductList: React.FC = () => {
                 )}
               </div>
               <div className="create-product-form">
-                <form action="" onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                   <div className="create-product-form">
-                    Product name{" "}
+                    Product name
                     <input
-                      type="name"
+                      type="text"
                       name="name"
                       placeholder="Product name"
                       value={formValues.name}
@@ -167,7 +210,7 @@ const StoreProductList: React.FC = () => {
                     />
                   </div>
                   <div className="create-product-form">
-                    Product description
+                    Product price
                     <input
                       type="number"
                       name="price"
@@ -177,11 +220,11 @@ const StoreProductList: React.FC = () => {
                     />
                   </div>
                   <div className="create-product-form">
-                    Product Quantity
+                    Product quantity
                     <input
                       type="number"
                       name="quantity"
-                      placeholder="Product price"
+                      placeholder="Product quantity"
                       value={formValues.quantity}
                       onChange={handleInputChange}
                     />
@@ -189,6 +232,7 @@ const StoreProductList: React.FC = () => {
                   <div className="submit-button">
                     <button
                       className="create-btn"
+                      type="submit"
                       onClick={() => setOpenModal(false)}
                     >
                       Create
