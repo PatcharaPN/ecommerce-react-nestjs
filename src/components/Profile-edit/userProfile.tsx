@@ -40,6 +40,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
           email: update.email,
         })
       );
+      onClose();
     }
   };
 

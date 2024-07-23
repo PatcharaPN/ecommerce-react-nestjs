@@ -9,38 +9,38 @@ function Categorymenu() {
             className="menuicon"
             icon="material-symbols:health-and-beauty-outline"
           />
-          <div>Beauty</div>
+          <p className="menu-text">Beauty</p>
         </div>
         <div className="shortmenu">
           <Icon className="menuicon" icon="ph:sneaker" />
-          <div>Sneaker</div>
+          <p className="menu-text">Sneaker</p>
         </div>
         <div className="shortmenu">
           <Icon
             className="menuicon"
             icon="material-symbols:pet-supplies-outline"
           />
-          <div>Pet</div>
+          <p className="menu-text">Pet</p>
         </div>
         <div className="shortmenu">
           <Icon className="menuicon" icon="gg:games" />
-          <div>Games</div>
+          <p className="menu-text">Games</p>
         </div>
         <div className="shortmenu">
           <Icon className="menuicon" icon="material-symbols:tv-outline" />
-          <div>Electronic</div>
+          <p className="menu-text">Electronic</p>
         </div>
         <div className="shortmenu">
           <Icon className="menuicon" icon="ic:baseline-laptop" />
-          <div>IT</div>
+          <p className="menu-text">IT</p>
         </div>
         <div className="shortmenu">
           <Icon className="menuicon" icon="ph:baby" />
-          <div>Baby</div>
+          <p className="menu-text">Baby</p>
         </div>
         <div className="shortmenu">
           <Icon className="menuicon" icon="fluent:sport-16-regular" />
-          <div>Sports</div>
+          <p className="menu-text">Sports</p>
         </div>
       </div>
     </div>

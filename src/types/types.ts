@@ -29,3 +29,12 @@ export interface User {
   email: string;
   date: string;
 }
+
+export interface StoreValue {
+  name: string;
+  location: string;
+  description: string;
+  following: number;
+  like: number;
+  products: string[];
+}
