@@ -9,6 +9,7 @@ import "./StorePage.css";
 import ImageUpload from "./components/StoreDescription/Store-Logo";
 import { createStore } from "../../app/features/productSlice";
 import { useAppDispatch } from "../../app/store";
+import { useParams } from "react-router-dom";
 
 type Props = {};
 

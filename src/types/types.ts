@@ -22,3 +22,10 @@ export interface CreateStore {
   description: string;
   owner: string;
 }
+
+export interface User {
+  _id: string;
+  username: string;
+  email: string;
+  date: string;
+}

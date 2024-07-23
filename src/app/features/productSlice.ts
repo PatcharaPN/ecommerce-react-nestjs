@@ -85,7 +85,12 @@ export const getStores: AsyncThunk<Store[], void, any> = createAsyncThunk(
   "product/getStores",
   async (): Promise<Store[]> => {
     const { data: res } = await axios.get<Store[]>(
-      "http://localhost:3000/stores"
+      "http://localhost:3000/stores",
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
     );
     return res;
   }

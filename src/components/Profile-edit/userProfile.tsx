@@ -1,7 +1,10 @@
 // Modal.tsx
-import React, { ReactNode } from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import "./userProfile.css";
 import ImageUpload from "../../pages/StorePage/components/StoreDescription/Store-Logo";
+import { useAppDispatch, useAppSelector } from "../../app/store";
+import { User } from "../../types/types";
+import { UpdateUser } from "../../app/features/authSlice";
 
 type ModalProps = {
   isOpen: boolean;
@@ -9,6 +12,37 @@ type ModalProps = {
 };
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.auth.currentUser);
+  const [update, setUpdate] = useState<User>({
+    _id: user?._id || "",
+    username: user?.username || "",
+    email: user?.email || "",
+    date: user?.dateOfBirth || "",
+  });
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUpdate((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleUpdate = (e: FormEvent) => {
+    e.preventDefault();
+    if (user && user._id) {
+      dispatch(
+        UpdateUser({
+          _id: user._id,
+          username: update.username,
+          date: update.date,
+          email: update.email,
+        })
+      );
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -23,25 +57,34 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
           </div>
           <div className="form-wrapper">
             <div className="user-edit-form">
-              <form action="" className="user-form">
+              <form onSubmit={handleUpdate} className="user-form">
                 <input
                   type="text"
+                  name="username"
                   placeholder="Username"
                   className="form-input"
+                  value={update.username}
+                  onChange={handleChange}
                 />
-                <input type="text" placeholder="Email" className="form-input" />
+                <input
+                  type="text"
+                  name="email"
+                  placeholder="Email"
+                  className="form-input"
+                  value={update.email}
+                  onChange={handleChange}
+                />
                 <input
                   type="date"
+                  name="dateOfBirth"
                   placeholder="Date of Birth"
                   className="form-input"
+                  value={update.date}
+                  onChange={handleChange}
                 />
                 <input
                   type="password"
-                  placeholder="Password"
-                  className="form-input"
-                />
-                <input
-                  type="password"
+                  name="confirmPassword"
                   placeholder="Confirm Password"
                   className="form-input"
                 />

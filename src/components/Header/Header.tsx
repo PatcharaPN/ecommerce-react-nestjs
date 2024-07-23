@@ -2,40 +2,28 @@ import { Icon } from "@iconify/react";
 import "./Header.css";
 import { useEffect, useState } from "react";
 import { Cart } from "../Cart/cart";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../app/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState, useAppSelector } from "../../app/store";
 import { getProducts } from "../../app/features/productSlice";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import ProfileModal from "../Profile-edit/userProfile";
-interface User {
-  email: number;
-  name: string;
-  username: string;
-  role: string;
-  tel: number;
-  userImage: string;
-}
+import { UpdateUser } from "../../app/features/authSlice";
+
 const Header: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false);
   const [ModalOpen, setModalOpen] = useState(false);
+  const user = useAppSelector((state: RootState) => state.auth.currentUser);
 
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
 
-  const [user, setUser] = useState<User | null>(null);
-
-  useEffect(() => {
-    const jsonData = localStorage.getItem("user");
-    if (jsonData) {
-      const parsedData: User = JSON.parse(jsonData);
-      setUser(parsedData);
-    }
-  }, []);
   const toggleDrawer = () => {
     console.log("clicked");
+    console.log(user);
+
     setDrawerOpen(!isDrawerOpen);
   };
 
@@ -110,7 +98,7 @@ const Header: React.FC = () => {
                 </div>
                 {user?.role === "merchant" ? (
                   <Link
-                    to="/store"
+                    to={`/store/${user.store._id}?userId=${user._id}`}
                     style={{ textDecoration: "none", color: "black" }}
                   >
                     <div className="menu-list" onClick={toggleDrawer}>

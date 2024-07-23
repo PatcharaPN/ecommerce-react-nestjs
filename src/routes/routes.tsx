@@ -19,7 +19,7 @@ const Routes = () => {
       element: <Layout />,
       children: [
         {
-          path: "/store",
+          path: "/store/:storeid",
           element: <ProtectedRoute element={<StorePage />} />,
         },
       ],
