@@ -1,4 +1,5 @@
 .sidebar-left {
+  display: block;
   background-color: transparent;
   padding: 20px;
   border-radius: 10px;

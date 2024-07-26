@@ -12,10 +12,18 @@
   flex: 1;
   overflow: hidden;
 }
+.content-container-withoutnav {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  padding: 20px;
+  flex: 1;
+  overflow: hidden;
+}
 
 .main-content {
   background-color: #fff;
-  padding: 20px;
+  padding: 30px;
   border-radius: 10px;
   flex: 1;
   overflow-y: auto;

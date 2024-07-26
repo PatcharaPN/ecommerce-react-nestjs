@@ -1,14 +1,32 @@
+/* login-page styles */
 .login-page {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   width: 100vw;
+  background: url("https://segwitz.com/wp-content/uploads/2021/09/why-ecommerce-need-mobile-apps.jpg");
+  background-size: cover;
+  backdrop-filter: blur(100px);
 }
 
+/* Wrapper styles */
 .con-wrapper {
   display: flex;
   align-items: center;
+}
+
+/* User type styles */
+.user-type {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.checkbox-form {
+  display: flex;
+  gap: 10px;
 }
 
 .login-container {
@@ -17,23 +35,27 @@
   align-items: center;
   padding: 50px;
   border-radius: 10px;
-  background-color: #f5f5f5;
+  background: #f5f5f5;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-  transition: all 0.5s ease;
+  transition: all 0.5s ease-in-out;
+  animation: fadeIn 0.45s;
 }
 
 .login-mode {
   opacity: 1;
   height: auto;
   transform: translateY(0);
+  animation: fadeIn 0.45s;
 }
 
 .register-mode {
   opacity: 1;
   height: auto;
   transform: translateY(0);
+  animation: fadeIn 0.45s;
 }
 
+/* Hidden form styles */
 .hidden {
   opacity: 0;
   height: 0;
@@ -42,9 +64,14 @@
   transition: all 0.5s ease;
 }
 
-.switch-text > p {
+.switch-text-warper {
+  width: 100%;
+  text-align: start;
+}
+
+.switch-text {
   padding: 10px 0;
-  font-size: 14px;
+  font-size: 11px;
 }
 
 .input-field {
@@ -59,14 +86,23 @@
   gap: 5px;
 }
 
-.btn {
+.register-btn {
   border: none;
   color: white;
-  background-color: grey;
+  background-color: #ff3985;
   border-radius: 10px;
   padding: 10px 20px;
 }
 
+.login-btn {
+  border: none;
+  color: white;
+  background-color: #ff3985;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+
+/* Register text styles */
 .register-text {
   margin-top: 10px;
   display: flex;
@@ -77,10 +113,20 @@
 .btn-switch {
   border: none;
   background-color: transparent;
-  color: grey;
+  color: rgb(184, 130, 255);
   cursor: pointer;
 }
 
 .btn-switch:hover {
   text-decoration: underline;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

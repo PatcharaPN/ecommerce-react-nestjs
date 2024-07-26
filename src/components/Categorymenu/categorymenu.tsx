@@ -1,47 +1,66 @@
+import { motion } from "framer-motion";
 import "./categorymenu.css";
 import { Icon } from "@iconify/react";
 function Categorymenu() {
   return (
     <div className="category-container">
       <div className="category-menu">
-        <div className="shortmenu">
-          <Icon
-            className="menuicon"
-            icon="material-symbols:health-and-beauty-outline"
-          />
+        <motion.div whileHover={{ scale: 1.1 }} className="shortmenu">
+          {" "}
+          <div className="img-wrapper">
+            <img src="../Beauty.svg" width={50} alt="" />{" "}
+          </div>
           <p className="menu-text">Beauty</p>
-        </div>
-        <div className="shortmenu">
-          <Icon className="menuicon" icon="ph:sneaker" />
+        </motion.div>
+        <motion.div whileHover={{ scale: 1.1 }} className="shortmenu">
+          {" "}
+          <div className="img-wrapper">
+            <img src="../Sneaker.svg" width={50} alt="" />{" "}
+          </div>
           <p className="menu-text">Sneaker</p>
-        </div>
-        <div className="shortmenu">
-          <Icon
-            className="menuicon"
-            icon="material-symbols:pet-supplies-outline"
-          />
+        </motion.div>
+        <motion.div whileHover={{ scale: 1.1 }} className="shortmenu">
+          {" "}
+          <div className="img-wrapper">
+            <img src="../Pet.svg" width={50} alt="" />{" "}
+          </div>
           <p className="menu-text">Pet</p>
-        </div>
-        <div className="shortmenu">
-          <Icon className="menuicon" icon="gg:games" />
+        </motion.div>
+        <motion.div whileHover={{ scale: 1.1 }} className="shortmenu">
+          {" "}
+          <div className="img-wrapper">
+            <img src="../Games.svg" width={50} alt="" />{" "}
+          </div>
           <p className="menu-text">Games</p>
-        </div>
-        <div className="shortmenu">
-          <Icon className="menuicon" icon="material-symbols:tv-outline" />
+        </motion.div>
+        <motion.div whileHover={{ scale: 1.1 }} className="shortmenu">
+          <div className="img-wrapper">
+            <img src="../Electronic.svg" width={50} alt="" />
+          </div>
+
           <p className="menu-text">Electronic</p>
-        </div>
-        <div className="shortmenu">
-          <Icon className="menuicon" icon="ic:baseline-laptop" />
+        </motion.div>
+        <motion.div whileHover={{ scale: 1.1 }} className="shortmenu">
+          {" "}
+          <div className="img-wrapper">
+            <img src="../IT.svg" width={50} alt="" />{" "}
+          </div>
           <p className="menu-text">IT</p>
-        </div>
-        <div className="shortmenu">
-          <Icon className="menuicon" icon="ph:baby" />
+        </motion.div>
+        <motion.div whileHover={{ scale: 1.1 }} className="shortmenu">
+          {" "}
+          <div className="img-wrapper">
+            <img src="../Baby.svg" width={50} alt="" />{" "}
+          </div>
           <p className="menu-text">Baby</p>
-        </div>
-        <div className="shortmenu">
-          <Icon className="menuicon" icon="fluent:sport-16-regular" />
+        </motion.div>
+        <motion.div whileHover={{ scale: 1.1 }} className="shortmenu">
+          {" "}
+          <div className="img-wrapper">
+            <img src="../Sport.svg" width={50} alt="" />{" "}
+          </div>
           <p className="menu-text">Sports</p>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

@@ -19,7 +19,7 @@ const StoreProductList: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | undefined>();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const [storeId, setStoreId] = useState("");
+  const [storeId, setStoreId] = useState<string>("");
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
   const products = useAppSelector(selectProducts);
@@ -37,20 +37,42 @@ const StoreProductList: React.FC = () => {
   const [localProducts, setLocalProducts] = useState<Product[]>([]);
 
   useEffect(() => {
+    const storedStoreId = localStorage.getItem("storeId");
+    if (storedStoreId) {
+      try {
+        const parsedStoreId = JSON.parse(storedStoreId);
+        setStoreId(parsedStoreId);
+      } catch (e) {
+        console.error("Failed to parse storeId:", e);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     const getStore = localStorage.getItem("user");
     if (getStore) {
-      setStoreId(JSON.parse(getStore).store._id);
+      const userStoreId = JSON.parse(getStore).store?._id;
+      if (userStoreId) {
+        setStoreId(userStoreId);
+        console.log("user store id:", userStoreId);
+      }
     }
   }, []);
 
   useEffect(() => {
     setLocalProducts(
       Array.isArray(products)
-        ? products.filter((product) => product.store?._id === user?.store?._id)
+        ? products.filter((product) => product.store?._id === storeId)
         : []
     );
-  }, [products, user]);
+  }, [products, user, storeId]);
 
+  useEffect(() => {
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      store: storeId,
+    }));
+  }, [storeId]);
   const handleProductClick = (product: Product) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
@@ -65,7 +87,6 @@ const StoreProductList: React.FC = () => {
     setFormValues({
       ...formValues,
       [name]: value,
-      store: storeId,
     });
   };
 
@@ -105,7 +126,7 @@ const StoreProductList: React.FC = () => {
       });
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
       setFile(selectedFile);
@@ -175,7 +196,7 @@ const StoreProductList: React.FC = () => {
             </div>
             <div className="create-product-grid">
               <div className="product-image-import">
-                <input type="file" onChange={handleChange} />
+                <input type="file" onChange={handleUpload} />
                 {formValues.file && (
                   <div className="product-preview">
                     <p>Preview</p>

@@ -4,7 +4,7 @@ import "./Layout.css";
 import SidebarRight from "../Sidebar-right/Sidebar-right";
 import Drawer from "../Drawer/Drawer";
 
-const Layout = () => {
+const LayoutWithoutNav = () => {
   const location = useLocation();
   const hideHeaderRoutes = ["/login"];
 
@@ -13,15 +13,13 @@ const Layout = () => {
   return (
     <div className="layout-container">
       {!shouldHideHeader && <Drawer />}
-      <div className="content-container">
-        <div></div>
+      <div className="content-container-withoutnav">
         <main className="main-content">
           <Outlet />
         </main>
-        <div></div>
       </div>
     </div>
   );
 };
 
-export default Layout;
+export default LayoutWithoutNav;

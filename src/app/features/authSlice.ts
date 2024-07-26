@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { RootState } from "../store";
 import { User } from "../../types/types";
+import { json } from "react-router-dom";
 
 export interface AuthState {
   user: any;
@@ -49,16 +50,34 @@ export const login = createAsyncThunk<
 
 export const register = createAsyncThunk<
   any,
-  { email: string; password: string },
+  { email: string; username: string; password: string; role: string },
   { state: RootState }
->("/auth/register", async ({ email, password }) => {
-  const response = await axios.post("http://localhost:3000/auth/register", {
-    email,
-    password,
-    confirmPassword: password,
-  });
-  return response.data;
-});
+>(
+  "/auth/register",
+  async ({ username, email, password, role }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/users/register",
+        {
+          email,
+          username,
+          password,
+          confirmPassword: password,
+          role,
+        }
+      );
+      const { user, access_token } = response.data;
+      localStorage.setItem("user", JSON.stringify(user));
+      console.log(response.data);
+
+      localStorage.setItem("accessToken", access_token);
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue("Registration failed");
+    }
+  }
+);
 
 export const UpdateUser = createAsyncThunk<any, User, { state: RootState }>(
   "/user/update",
@@ -74,7 +93,14 @@ export const UpdateUser = createAsyncThunk<any, User, { state: RootState }>(
     const updatedUser = response.data.user;
     console.log("Updated user:", updatedUser);
 
-    localStorage.setItem("user", JSON.stringify(updatedUser));
+    const existingUser = JSON.parse(localStorage.getItem("user") || "{}");
+    const mergedUserData = {
+      ...existingUser,
+      username: updatedUser.username,
+      email: updatedUser.email,
+    };
+
+    localStorage.setItem("user", JSON.stringify(mergedUserData));
 
     return updatedUser;
   }

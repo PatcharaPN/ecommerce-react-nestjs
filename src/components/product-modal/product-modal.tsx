@@ -5,6 +5,7 @@ import { Icon } from "@iconify/react";
 import { Product, Store } from "../../app/features/productSlice";
 import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../app/features/cartSlice";
+import { motion } from "framer-motion";
 
 interface ProductModalProps {
   product?: Product;
@@ -24,11 +25,25 @@ export const ProductModal: React.FC<ProductModalProps> = ({
     dispatch(addItemToCart(product));
     console.log("added to cart");
   };
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+  };
   return (
     <div className="modal-backdrop" onClick={closeModal}>
-      <div className="modal" onClick={(e) => e.stopPropagation()}>
+      <motion.div
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        exit={{ scale: 0.9 }}
+        transition={{ duration: 0.1 }}
+        className="modal-product"
+        onClick={handleClick}
+      >
         <div className="modal-content">
-          <span className="close" onClick={closeModal}>
+          <span
+            style={{ cursor: "pointer", float: "right", fontSize: "30px" }}
+            className="close-btn"
+            onClick={closeModal}
+          >
             &times;
           </span>
           <div className="product-content">
@@ -76,11 +91,13 @@ export const ProductModal: React.FC<ProductModalProps> = ({
             </div>
           </div>
           <div className="shop-section">
-            <div className="shop-picture"></div>
+            <div className="shop-picture">
+              <img src={store.storeimg} className="shop-img" alt="" />
+            </div>
             <div className="shop-information">
               <div className="shop-desc">
                 <p className="shop-info name ">{store.name}</p>
-                <p className="shop-info desc">Shop Description</p>
+                <p className="shop-info desc">{store.description}</p>
                 <div className="follower-section">
                   <p className="shop-info follower">Follower</p>
                   <p className="shop-info following">Following</p>
@@ -94,7 +111,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

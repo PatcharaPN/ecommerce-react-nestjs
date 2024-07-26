@@ -11,6 +11,20 @@
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   transition: transform 0.3s ease-in-out;
 }
+.card-container:hover {
+  border: solid 1px #ff3985;
+}
+.location {
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  color: #949494;
+}
+.quantity-transport {
+  display: flex;
+  margin-top: 20px;
+  justify-content: space-between;
+}
 .product-img {
   width: 150px;
   height: auto;

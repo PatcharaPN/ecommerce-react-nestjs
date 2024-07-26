@@ -44,8 +44,20 @@ export const Cart: React.FC = () => {
         <Icon className="icon" icon="mdi:cart-outline" />
       </div>
       {isopenCart && (
-        <div className="modal-backdrop">
-          <div className="modal">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className="modal-backdrop"
+        >
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0.9 }}
+            transition={{ duration: 0.1 }}
+            className="modal"
+          >
             <div className="modal-content">
               <span className="close" onClick={closeModal}>
                 &times;
@@ -144,8 +156,8 @@ export const Cart: React.FC = () => {
               </div>
             </div>
             <button className="checkout-btn-mobile">Checkout</button>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
     </div>
   );

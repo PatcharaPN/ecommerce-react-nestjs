@@ -1,8 +1,12 @@
 import "./Store-Description.css";
-const StoreDescription = () => {
+
+interface StoreDescriptionProps {
+  description: string;
+}
+const StoreDescription = (prop: StoreDescriptionProps) => {
   return (
     <div className="store-content-wrapper">
-      <div className="store-description">Store-description</div>
+      <div className="store-description">{prop.description}</div>
     </div>
   );
 };

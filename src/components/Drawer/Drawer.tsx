@@ -1,23 +1,35 @@
 import { Icon } from "@iconify/react";
-import "./Header.css";
+import "./Drawer.css";
 import { useEffect, useState } from "react";
 import { Cart } from "../Cart/cart";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { AppDispatch, RootState, useAppSelector } from "../../app/store";
 import { getProducts } from "../../app/features/productSlice";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import ProfileModal from "../Profile-edit/userProfile";
-import { UpdateUser } from "../../app/features/authSlice";
+import Searchbar from "../SearchBar/Searchbar";
 
-const Header: React.FC = () => {
+const Drawer: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false);
   const [ModalOpen, setModalOpen] = useState(false);
   const user = useAppSelector((state: RootState) => state.auth.currentUser);
+  const [storeId, setStoreId] = useState(null);
+  const url = `/store/${storeId}?userId=${user._id}`;
 
   useEffect(() => {
     dispatch(getProducts());
+    const storeIdString = localStorage.getItem("storeId");
+    if (storeIdString) {
+      try {
+        const storeId = JSON.parse(storeIdString);
+        setStoreId(storeId);
+        console.log(storeId);
+      } catch (e) {
+        console.error("Failed to parse storeId:", e);
+      }
+    }
   }, [dispatch]);
 
   const toggleDrawer = () => {
@@ -31,8 +43,10 @@ const Header: React.FC = () => {
     setModalOpen(true);
     setDrawerOpen(false);
   };
+
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("storeId");
     window.location.reload();
   };
 
@@ -40,15 +54,26 @@ const Header: React.FC = () => {
     <div className="header-con">
       {" "}
       <ProfileModal isOpen={ModalOpen} onClose={() => setModalOpen(false)} />
-      <div className="logo">
-        <Icon icon="solar:figma-outline" />
+      <Link to={"/"}>
+        {" "}
+        <div className="logo">
+          <img src="../../../public/logo.svg" width={135} alt="" />
+        </div>
+      </Link>
+      <div className="search-bar">
+        <Searchbar />
       </div>
-      <div className="search-bar"></div>
       <div className="menu">
         <Icon className="icon" icon="majesticons:chat-line" />
         <Cart />
         <div className="user-con" onClick={toggleDrawer}>
-          <img src={user?.userImage} width={40} height={40} alt="" />
+          <img
+            src={user?.userImage}
+            width={40}
+            height={40}
+            className="user-profile-mini"
+            alt=""
+          />
         </div>
       </div>
       <div className={`drawer ${isDrawerOpen ? "open" : ""}`}>
@@ -98,7 +123,7 @@ const Header: React.FC = () => {
                 </div>
                 {user?.role === "merchant" ? (
                   <Link
-                    to={`/store/${user.store._id}?userId=${user._id}`}
+                    to={url}
                     style={{ textDecoration: "none", color: "black" }}
                   >
                     <div className="menu-list" onClick={toggleDrawer}>
@@ -130,4 +155,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default Drawer;

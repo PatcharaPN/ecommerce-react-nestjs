@@ -13,6 +13,7 @@ export interface Product {
   rating: number;
   quantity: number;
   store: Store;
+  location: Store["location"];
 }
 interface CreateStoreArgs {
   name: string;
@@ -24,7 +25,9 @@ export interface Store {
   _id: string;
   name: string;
   location: string;
+  description: string;
   following: number;
+  storeimg: string;
   like: number;
   products: Product[];
 }
@@ -95,16 +98,29 @@ export const getStores: AsyncThunk<Store[], void, any> = createAsyncThunk(
     return res;
   }
 );
-export const createStore = createAsyncThunk<Store, CreateStoreArgs, any>(
-  "store/createStore",
-  async (args) => {
+export const createStore = createAsyncThunk<
+  Store,
+  FormData,
+  { rejectValue: string }
+>("store/createStore", async (formData, { rejectWithValue }) => {
+  try {
     const { data } = await axios.post<Store>(
       "http://localhost:3000/stores",
-      args
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
     );
+    localStorage.setItem("storeId", data._id);
     return data;
+  } catch (error) {
+    console.error(error);
+    return rejectWithValue("Failed to create store");
   }
-);
+});
 
 export const getProductsByStoreId: AsyncThunk<Product[], string, any> =
   createAsyncThunk(

@@ -1,31 +1,30 @@
 import React, { useEffect, useState } from "react";
 import StoreProductList from "../../components/Store-product/StoreProduct-list";
 import StoreProfile from "../../components/Store-Profile/StoreProfile";
-import StoreDescription from "./components/StoreDescription/Store-Description";
 import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
 import { CreateStore, Store } from "../../types/types";
 import "./StorePage.css";
-import ImageUpload from "./components/StoreDescription/Store-Logo";
 import { createStore } from "../../app/features/productSlice";
 import { useAppDispatch } from "../../app/store";
-import { useParams } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 type Props = {};
 
 function StorePage({}: Props) {
   const dispatch = useAppDispatch();
   const [searchTerm, setSearchTerm] = useState("");
-  const [store, setStore] = useState<Store[]>([]);
+  const [store, setStore] = useState<Store | null>(null);
   const [currentUserId, setCurrentUser] = useState("");
+  const [file, setFile] = useState<File | null>(null);
   const [formData, setFormData] = useState<CreateStore>({
     name: "",
     description: "",
     location: "",
     owner: "",
+    storeimg: "",
   });
   const [openModal, setOpenModal] = useState(false);
-
+  const navigate = useNavigate();
   const provinces = [
     "Bangkok",
     "Kanchanaburi",
@@ -100,14 +99,13 @@ function StorePage({}: Props) {
   useEffect(() => {
     const getUserId = localStorage.getItem("user");
     if (getUserId) {
-      setCurrentUser(JSON.parse(getUserId)._id);
-    }
-  }, []);
-
-  useEffect(() => {
-    const getStore = localStorage.getItem("user");
-    if (getStore) {
-      setStore(JSON.parse(getStore).store);
+      const user = JSON.parse(getUserId);
+      setCurrentUser(user._id);
+      if (user.store) {
+        setStore(user.store);
+      } else {
+        setStore(null);
+      }
     }
   }, []);
 
@@ -139,17 +137,39 @@ function StorePage({}: Props) {
       });
     }
   };
-
+  const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+      setFormData({
+        ...formData,
+        storeimg: URL.createObjectURL(selectedFile),
+        owner: currentUserId,
+      });
+    }
+  };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const resultAction = await dispatch(createStore(formData)).unwrap();
+      const form = new FormData();
+      form.append("name", formData.name);
+      form.append("description", formData.description);
+      form.append("location", formData.location);
+      form.append("owner", currentUserId);
+      if (file) {
+        form.append("image", file);
+      }
+
+      const resultAction = await dispatch(createStore(form)).unwrap();
+      console.log("Store creation result:", resultAction);
 
       const storedUser = localStorage.getItem("user");
       if (storedUser) {
         const userData = JSON.parse(storedUser);
 
-        const updatedStores = [...userData.store, resultAction];
+        const updatedStores = userData.store
+          ? [...userData.store, resultAction]
+          : [resultAction];
 
         localStorage.setItem(
           "user",
@@ -158,7 +178,12 @@ function StorePage({}: Props) {
             store: updatedStores,
           })
         );
+        console.log(updatedStores);
       }
+
+      console.log("Navigating to:", `/store/${resultAction._id}`);
+      navigate(`/store/${resultAction._id}`, { replace: true });
+      window.location.reload();
       setOpenModal(false);
     } catch (error) {
       console.error("Error creating store:", error);
@@ -169,7 +194,7 @@ function StorePage({}: Props) {
     province.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  if (store.length === 0) {
+  if (!store) {
     return (
       <div className="create-store-container">
         <p>Oop no store found on your account.</p>
@@ -195,7 +220,12 @@ function StorePage({}: Props) {
             <div className="create-store-form">
               <div className="create-store-wrapper">
                 <div className="imageupload">
-                  <ImageUpload />
+                  <input
+                    type="file"
+                    name="storeimg"
+                    id=""
+                    onChange={handleUpload}
+                  />
                 </div>
               </div>
               <div className="create-store-form-wrapper">
@@ -238,7 +268,6 @@ function StorePage({}: Props) {
                   <motion.button
                     type="submit"
                     className="createstore-btn"
-                    onClick={handleSubmit}
                     whileHover={{ scale: 1.05, backgroundColor: "black" }}
                   >
                     Create
@@ -255,7 +284,6 @@ function StorePage({}: Props) {
   return (
     <div>
       <StoreProfile />
-      <StoreDescription />
       <StoreProductList />
     </div>
   );

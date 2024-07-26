@@ -6,6 +6,8 @@ import App from "../App";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import ProtectedRoute from "./ProtectedRoute";
 import StorePage from "../pages/StorePage/StorePage";
+import Notfound from "../pages/NotFound/Notfound";
+import LayoutWithoutNav from "../components/Layout/LayoutWithoutSidebar";
 
 const Routes = () => {
   const routes = useRoutes([
@@ -27,6 +29,17 @@ const Routes = () => {
     {
       path: "/login",
       children: [{ path: "/login", element: <LoginPage /> }],
+    },
+
+    {
+      path: "*",
+      element: <LayoutWithoutNav />,
+      children: [
+        {
+          path: "*",
+          element: <Notfound />,
+        },
+      ],
     },
   ]);
 

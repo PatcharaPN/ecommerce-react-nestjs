@@ -11,6 +11,7 @@ export interface Store {
   name: string;
   location: string;
   owner: string[];
+  description: string;
   products: any[];
   createdAt: string;
   updatedAt: string;
@@ -21,6 +22,7 @@ export interface CreateStore {
   location: string;
   description: string;
   owner: string;
+  storeimg: string;
 }
 
 export interface User {

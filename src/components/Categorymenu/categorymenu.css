@@ -11,115 +11,58 @@
 
 .category-menu {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
 }
+
 .shortmenu {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
   align-items: center;
   justify-content: center;
-  width: 63px;
-  height: 63px;
+  width: 100px;
+  height: 120px;
   text-align: center;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin: 1rem;
 }
 
-.shortmenu .menuicon {
-  font-size: 3rem;
+.shortmenu img {
+  width: 50px;
+  height: auto;
+}
+.img-wrapper {
+  display: flex;
+  justify-content: center;
 }
 
-.shortmenu div {
+.shortmenu .menu-text {
   font-weight: bold;
   margin-top: 0.5rem;
+  line-height: 1.2;
+  height: 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 @media (max-width: 480px) {
-  .category-menu {
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: center;
-  }
   .shortmenu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    text-align: center;
-    margin-bottom: 1.5rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
+    width: 80px;
+    height: 100px;
   }
 }
+
 @media only screen and (min-width: 600px) and (max-width: 899px) {
-  .category-menu {
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: center;
-  }
   .shortmenu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    text-align: center;
-    margin-bottom: 1.5rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
+    width: 90px;
+    height: 110px;
   }
 }
-@media only screen and (min-width: 520px) and (max-width: 899px) {
-  .category-menu {
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: center;
-  }
-  .shortmenu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    text-align: center;
-    margin-bottom: 1.5rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
-  }
-}
+
 @media only screen and (min-width: 1024px) and (max-width: 1440px) {
-  .category-container {
-    margin-top: 20px;
-    margin-bottom: 5%;
-    width: auto;
-    height: auto;
-  }
-
-  .category-menu {
-    display: flex;
-    justify-content: center;
-  }
   .shortmenu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 53px;
-    height: 53px;
-    text-align: center;
-    margin-left: 2rem;
-    margin-right: 2rem;
-  }
-
-  .shortmenu .menuicon {
-    font-size: 3rem;
-  }
-
-  .shortmenu div {
-    font-weight: bold;
-    margin-top: 0.5rem;
+    width: 100px;
+    height: 120px;
   }
 }

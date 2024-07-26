@@ -8,11 +8,12 @@ interface Store {
   description: string;
   following: number;
   like: number;
+  storeimg: string;
   products: string[];
 }
 
 const StoreProfile: React.FC = () => {
-  const [store, setStore] = useState<Store | null>(null);
+  const [store, setStore] = useState<Store | any>(null);
   const [loading, setLoading] = useState(true);
 
   const loadStorageData = () => {
@@ -21,6 +22,9 @@ const StoreProfile: React.FC = () => {
       const parsedData = JSON.parse(getStore).store;
       setStore(parsedData);
       setLoading(false);
+      console.log("skibidi", store);
+
+      console.log(store?.name ?? "Store not available");
     }
   };
 
@@ -55,15 +59,17 @@ const StoreProfile: React.FC = () => {
         <motion.img
           whileHover={{ scale: 0.991, filter: "brightness(80%)" }}
           className="store-profile-img"
-          src="https://i.pinimg.com/280x280_RS/98/22/b4/9822b49357f41d2a3cce542ff1240b7f.jpg"
+          src={store?.[0]?.storeimg ?? store?.storeimg}
           alt="Store Profile"
         />
       </div>
       <div className="store-info">
         <div className="store-divider">
           <div className="store-name">
-            <h1>{store?.name}</h1>
-            <div className="store-location">@{store?.location}</div>
+            <h1>{store?.[0]?.name ?? store?.name}</h1>
+            <div className="store-location">
+              @{store?.[0]?.location ?? store?.location}
+            </div>
           </div>
           <motion.button className="edit-store" whileHover={{ scale: 1.05 }}>
             Edit Store
