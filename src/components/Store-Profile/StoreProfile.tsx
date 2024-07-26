@@ -21,8 +21,8 @@ const StoreProfile: React.FC = () => {
     if (getStore) {
       const parsedData = JSON.parse(getStore).store;
       setStore(parsedData);
+
       setLoading(false);
-      console.log("skibidi", store);
 
       console.log(store?.name ?? "Store not available");
     }

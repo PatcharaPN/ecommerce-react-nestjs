@@ -7,7 +7,9 @@
 }
 .amount-items {
   position: absolute;
-  top: 10px;
+  top: -10px;
+  left: -5px;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,6 +21,12 @@
   font-size: 10px;
   font-weight: bold;
   border-radius: 50%;
+}
+.cart-btn {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  color: #ffffff;
 }
 .modal {
   width: 1500px;
@@ -37,7 +45,10 @@
   overflow: auto;
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
-
+.cart-icon {
+  cursor: pointer;
+  font-size: 40px;
+}
 .modal .close {
   position: absolute;
   top: 10px;

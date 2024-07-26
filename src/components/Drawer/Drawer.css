@@ -10,8 +10,22 @@
   transform: translateX(-50%);
   position: absolute;
 }
+.chat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 35px;
+}
+.chat {
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .menu {
   display: flex;
+  gap: 30px;
   align-items: center;
 }
 .user-img {

@@ -1,7 +1,5 @@
-// Modal.tsx
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import "./userProfile.css";
-import ImageUpload from "../../pages/StorePage/components/StoreDescription/Store-Logo";
 import { useAppDispatch, useAppSelector } from "../../app/store";
 import { User } from "../../types/types";
 import { UpdateUser } from "../../app/features/authSlice";
@@ -14,11 +12,13 @@ type ModalProps = {
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.auth.currentUser);
+  const [file, setFile] = useState<File | null>(null);
   const [update, setUpdate] = useState<User>({
     _id: user?._id || "",
     username: user?.username || "",
     email: user?.email || "",
     date: user?.dateOfBirth || "",
+    userImage: "",
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -29,18 +29,44 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
     }));
   };
 
-  const handleUpdate = (e: FormEvent) => {
+  const handleUpdate = async (e: FormEvent) => {
     e.preventDefault();
-    if (user && user._id) {
-      dispatch(
-        UpdateUser({
-          _id: user._id,
-          username: update.username,
-          date: update.date,
-          email: update.email,
-        })
-      );
+    try {
+      const form = new FormData();
+      form.append("_id", update._id);
+      if (update.username) form.append("username", update.username);
+      if (update.email) form.append("email", update.email);
+      if (update.date) form.append("date", update.date);
+      if (file) form.append("image", file);
+
+      for (let pair of form.entries()) {
+        console.log(`${pair[0]}: ${pair[1]}`);
+      }
+
+      const updatedUser = await dispatch(UpdateUser(form)).unwrap();
+
+      const existingUser = JSON.parse(localStorage.getItem("user") || "{}");
+      const mergedUserData = {
+        ...existingUser,
+        username: updatedUser.username || existingUser.username,
+        email: updatedUser.email || existingUser.email,
+        userImage: updatedUser.userImage || existingUser.userImage,
+      };
+
+      localStorage.setItem("user", JSON.stringify(mergedUserData));
       onClose();
+    } catch (error) {
+      console.error("An error occurred while updating the user", error);
+    }
+  };
+  const handleUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+      setUpdate({
+        ...update,
+        userImage: URL.createObjectURL(selectedFile),
+      });
     }
   };
 
@@ -53,7 +79,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
         <div className="modal-edit">
           <div className="user-image-wrapper">
             <div className="imageupload">
-              <ImageUpload />
+              <input type="file" onChange={handleUpload} />
+              {update.userImage && <img src={update.userImage} alt="User" />}
             </div>
           </div>
           <div className="form-wrapper">
@@ -77,7 +104,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                 />
                 <input
                   type="date"
-                  name="dateOfBirth"
+                  name="date"
                   placeholder="Date of Birth"
                   className="form-input"
                   value={update.date}

@@ -79,32 +79,30 @@ export const register = createAsyncThunk<
   }
 );
 
-export const UpdateUser = createAsyncThunk<any, User, { state: RootState }>(
-  "/user/update",
-  async (userData: User) => {
-    const response = await axios.put(
-      `http://localhost:3000/users/${userData._id}`,
-      {
-        username: userData.username,
-        email: userData.email,
-      }
-    );
+export const UpdateUser = createAsyncThunk<
+  User,
+  FormData,
+  { state: RootState }
+>("/user/update", async (formData: FormData, { getState }) => {
+  const state = getState();
+  const userId = state.auth.currentUser._id;
 
-    const updatedUser = response.data.user;
-    console.log("Updated user:", updatedUser);
+  const response = await axios.put(
+    `http://localhost:3000/users/${userId}`,
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }
+  );
 
-    const existingUser = JSON.parse(localStorage.getItem("user") || "{}");
-    const mergedUserData = {
-      ...existingUser,
-      username: updatedUser.username,
-      email: updatedUser.email,
-    };
+  const updatedUser = response.data.user;
+  console.log("Updated user:", updatedUser);
 
-    localStorage.setItem("user", JSON.stringify(mergedUserData));
-
-    return updatedUser;
-  }
-);
+  return updatedUser;
+});
 const authSlice = createSlice({
   name: "auth",
   initialState,

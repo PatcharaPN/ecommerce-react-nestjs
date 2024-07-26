@@ -52,19 +52,25 @@ const Drawer: React.FC = () => {
 
   return (
     <div className="header-con">
-      {" "}
       <ProfileModal isOpen={ModalOpen} onClose={() => setModalOpen(false)} />
       <Link to={"/"}>
-        {" "}
         <div className="logo">
-          <img src="../../../public/logo.svg" width={135} alt="" />
+          <img
+            src="../../../public/logo.svg"
+            width={125}
+            alt=""
+            className="logo-img"
+          />
         </div>
       </Link>
       <div className="search-bar">
         <Searchbar />
       </div>
       <div className="menu">
-        <Icon className="icon" icon="majesticons:chat-line" />
+        <div className="chat">
+          <Icon className="chat-icon" icon="majesticons:chat-line" />
+        </div>
+
         <Cart />
         <div className="user-con" onClick={toggleDrawer}>
           <img

@@ -24,8 +24,8 @@ const StoreProductList: React.FC = () => {
   const user = useAppSelector(selectUser);
   const products = useAppSelector(selectProducts);
   const loading = useAppSelector(selectLoading);
-
   const [file, setFile] = useState<File | null>(null);
+  const [localProducts, setLocalProducts] = useState<Product[]>([]);
   const [formValues, setFormValues] = useState<FormValues>({
     name: "",
     description: "",
@@ -34,16 +34,16 @@ const StoreProductList: React.FC = () => {
     file: null,
     store: storeId,
   });
-  const [localProducts, setLocalProducts] = useState<Product[]>([]);
-
   useEffect(() => {
     const storedStoreId = localStorage.getItem("storeId");
     if (storedStoreId) {
       try {
         const parsedStoreId = JSON.parse(storedStoreId);
         setStoreId(parsedStoreId);
+        console.log("Stored storeId:", parsedStoreId);
       } catch (e) {
         console.error("Failed to parse storeId:", e);
+        localStorage.removeItem("storeId");
       }
     }
   }, []);
@@ -51,13 +51,18 @@ const StoreProductList: React.FC = () => {
   useEffect(() => {
     const getStore = localStorage.getItem("user");
     if (getStore) {
-      const userStoreId = JSON.parse(getStore).store?._id;
-      if (userStoreId) {
-        setStoreId(userStoreId);
-        console.log("user store id:", userStoreId);
+      try {
+        const user = JSON.parse(getStore);
+        const userStoreId = user.store[0]?._id || user.store?._id;
+        if (userStoreId) {
+          setStoreId(userStoreId);
+          console.log("user store id:", userStoreId);
+        }
+      } catch (e) {
+        console.error("Failed to parse user data:", e);
       }
     }
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     setLocalProducts(
@@ -65,7 +70,7 @@ const StoreProductList: React.FC = () => {
         ? products.filter((product) => product.store?._id === storeId)
         : []
     );
-  }, [products, user, storeId]);
+  }, [products, user, storeId, dispatch]);
 
   useEffect(() => {
     setFormValues((prevValues) => ({
@@ -90,34 +95,6 @@ const StoreProductList: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("name", formValues.name);
-    formData.append("description", formValues.description);
-    formData.append("price", formValues.price.toString());
-    formData.append("quantity", formValues.quantity.toString());
-    formData.append("store", formValues.store);
-    if (file) {
-      formData.append("image", file);
-    }
-
-    dispatch(submitProduct(formData))
-      .unwrap()
-      .then((newProduct: Product) => {
-        if (newProduct.store) {
-          setLocalProducts([...localProducts, newProduct]);
-        } else {
-          console.error("New product does not have a store field.");
-        }
-      })
-      .catch((error) => {
-        console.error("Failed to submit product:", error);
-      });
-
-    console.log(formValues);
-  };
-
   const handleDelete = (id: string) => {
     dispatch(deleteProduct(id))
       .unwrap()
@@ -138,6 +115,36 @@ const StoreProductList: React.FC = () => {
     }
   };
 
+  const handleSubmitProduct = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const form = new FormData();
+    form.append("name", formValues.name);
+    form.append("description", formValues.description);
+    form.append("price", formValues.price.toString());
+    form.append("quantity", formValues.quantity.toString());
+    form.append("store", storeId);
+
+    if (file) {
+      form.append("image", file);
+    }
+
+    try {
+      const response = await dispatch(submitProduct(form)).unwrap();
+      setLocalProducts((prevProducts) => [...prevProducts, response]);
+      setFormValues({
+        name: "",
+        description: "",
+        price: 0,
+        quantity: 0,
+        file: null,
+        store: storeId,
+      });
+      console.log("Product creation result:", response);
+    } catch (error) {
+      console.error("Error creating product:", error);
+    }
+  };
   return (
     <div className="product-list-container">
       <div className="filter-products"></div>
@@ -209,7 +216,7 @@ const StoreProductList: React.FC = () => {
                 )}
               </div>
               <div className="create-product-form">
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmitProduct}>
                   <div className="create-product-form">
                     Product name
                     <input

@@ -1,20 +1,17 @@
+import { BigImage } from "./banner-big";
 import "./banner.css";
 interface BannerProps {
   LargeImage: string;
   smallImagetop: string;
   smallImagebot: string;
 }
-const Banner: React.FC<BannerProps> = ({
-  LargeImage,
-  smallImagetop,
-  smallImagebot,
-}) => {
+const Banner: React.FC<BannerProps> = ({ smallImagetop, smallImagebot }) => {
   return (
     <div className="banner-wrapper">
       <div className="banner-content1">
         <div className="image-section">
           <div className="large-image">
-            <img className="banner-img" src={LargeImage} alt="Large Image" />
+            <BigImage />
           </div>
           <div className="small-image top">
             <img
@@ -32,9 +29,7 @@ const Banner: React.FC<BannerProps> = ({
           </div>
         </div>
       </div>
-      <div className="banner-content1-slider">
-        <img src={LargeImage} width={300} height={100} alt="" />
-      </div>
+      <div className="banner-content1-slider"></div>
     </div>
   );
 };

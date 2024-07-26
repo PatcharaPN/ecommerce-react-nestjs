@@ -2,7 +2,9 @@
   padding-bottom: 5%;
   padding-top: 2%;
 }
-
+.header-con {
+  padding: 10px 60px;
+}
 .banner-content1-slider {
   display: none;
 }
@@ -23,6 +25,8 @@
 
 .large-image {
   grid-row: span 2;
+  width: auto;
+  max-width: 700px;
 }
 
 .small-image {

@@ -156,6 +156,7 @@ function StorePage({}: Props) {
       form.append("description", formData.description);
       form.append("location", formData.location);
       form.append("owner", currentUserId);
+
       if (file) {
         form.append("image", file);
       }
@@ -178,7 +179,7 @@ function StorePage({}: Props) {
             store: updatedStores,
           })
         );
-        console.log(updatedStores);
+        console.log("Updated store ID:", resultAction._id);
       }
 
       console.log("Navigating to:", `/store/${resultAction._id}`);

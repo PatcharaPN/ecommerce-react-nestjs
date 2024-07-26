@@ -114,10 +114,16 @@ export const createStore = createAsyncThunk<
         },
       }
     );
-    localStorage.setItem("storeId", data._id);
-    return data;
+
+    if (data && data._id) {
+      localStorage.setItem("storeId", data._id);
+      console.log("Successfully set storeId in localStorage:", data._id);
+      return data;
+    } else {
+      throw new Error("Invalid store data");
+    }
   } catch (error) {
-    console.error(error);
+    console.error("Error creating store:");
     return rejectWithValue("Failed to create store");
   }
 });

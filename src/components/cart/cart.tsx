@@ -41,7 +41,7 @@ export const Cart: React.FC = () => {
     <div className="cart-box">
       <div className="cart-btn" onClick={handleClickCart}>
         <div className="amount-items">{itemCount}</div>
-        <Icon className="icon" icon="mdi:cart-outline" />
+        <Icon className="cart-icon" icon="mdi:cart-outline" />
       </div>
       {isopenCart && (
         <motion.div
