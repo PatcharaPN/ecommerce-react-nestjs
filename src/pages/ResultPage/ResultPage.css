@@ -1,0 +1,8 @@
+.search-result-header {
+  margin-bottom: 20px;
+}
+.search-results-grid {
+  display: flex;
+
+  gap: 20px;
+}

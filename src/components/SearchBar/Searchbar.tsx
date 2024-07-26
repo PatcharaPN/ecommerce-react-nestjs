@@ -3,19 +3,19 @@ import "./Searchbar.css";
 import { getProducts, Product } from "../../app/features/productSlice";
 import { useAppDispatch, useAppSelector } from "../../app/store";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import { Link, useNavigate } from "react-router-dom";
 
 const Searchbar = () => {
   const dispatch = useAppDispatch();
   const products = useAppSelector((state) => state.product.products);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [searchResults, setSearchResults] = useState<Product[]>([]);
+  const navigate = useNavigate();
 
-  // Load products when the component mounts
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
 
-  // Filter products based on the search term
   useEffect(() => {
     if (searchTerm !== "") {
       const result = products.filter((product) =>
@@ -28,7 +28,11 @@ const Searchbar = () => {
   }, [searchTerm, products]);
 
   const handleonChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
     setSearchTerm(e.target.value);
+  };
+  const handleSearchSubmit = () => {
+    navigate(`/search?query=${searchTerm}`);
   };
 
   return (
@@ -43,6 +47,11 @@ const Searchbar = () => {
           value={searchTerm}
           onChange={handleonChange}
         />
+        <Link to={`/search?query=${searchTerm}`}>
+          <div className="search-btn" onClick={handleSearchSubmit}>
+            <Icon icon="line-md:search" />
+          </div>
+        </Link>
       </div>
       <div className="searchbar-results">
         {searchResults.map((product) => (

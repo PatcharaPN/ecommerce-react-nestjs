@@ -12,6 +12,7 @@ import Searchbar from "../SearchBar/Searchbar";
 
 const Drawer: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
+
   const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false);
   const [ModalOpen, setModalOpen] = useState(false);
   const user = useAppSelector((state: RootState) => state.auth.currentUser);

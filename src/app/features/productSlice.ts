@@ -15,12 +15,7 @@ export interface Product {
   store: Store;
   location: Store["location"];
 }
-interface CreateStoreArgs {
-  name: string;
-  description: string;
-  location: string;
-  owner: string;
-}
+
 export interface Store {
   _id: string;
   name: string;

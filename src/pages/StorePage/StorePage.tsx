@@ -221,13 +221,15 @@ function StorePage({}: Props) {
             <div className="create-store-form">
               <div className="create-store-wrapper">
                 <div className="imageupload">
-                  <input
-                    type="file"
-                    name="storeimg"
-                    id=""
-                    onChange={handleUpload}
-                  />
-                </div>
+                  {formData.storeimg && (
+                    <img
+                      className="user-image"
+                      src={formData.storeimg}
+                      alt="User"
+                    />
+                  )}
+                </div>{" "}
+                <input type="file" name="storeimg" onChange={handleUpload} />
               </div>
               <div className="create-store-form-wrapper">
                 <form onSubmit={handleSubmit}>

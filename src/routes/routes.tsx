@@ -8,6 +8,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import StorePage from "../pages/StorePage/StorePage";
 import Notfound from "../pages/NotFound/Notfound";
 import LayoutWithoutNav from "../components/Layout/LayoutWithoutSidebar";
+import ResultPage from "../pages/ResultPage/ResultPage";
 
 const Routes = () => {
   const routes = useRoutes([
@@ -23,6 +24,16 @@ const Routes = () => {
         {
           path: "/store/:storeid",
           element: <ProtectedRoute element={<StorePage />} />,
+        },
+      ],
+    },
+    {
+      path: "/search",
+      element: <Layout />,
+      children: [
+        {
+          path: "/search",
+          element: <ProtectedRoute element={<ResultPage />} />,
         },
       ],
     },

@@ -2,6 +2,21 @@
   width: 50vw;
   position: relative;
 }
+.search-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: #ff3985;
+  cursor: pointer;
+  z-index: 1000;
+}
 
 .searchbar-input {
   width: 100%;
@@ -16,6 +31,7 @@
 
 .searchbar-results {
   position: absolute;
+  z-index: 1000;
   width: 50vw;
   margin-top: 5px;
   background: #fff;

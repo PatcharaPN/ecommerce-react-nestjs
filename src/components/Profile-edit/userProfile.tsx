@@ -79,8 +79,10 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
         <div className="modal-edit">
           <div className="user-image-wrapper">
             <div className="imageupload">
+              {update.userImage && (
+                <img className="user-image" src={update.userImage} alt="User" />
+              )}{" "}
               <input type="file" onChange={handleUpload} />
-              {update.userImage && <img src={update.userImage} alt="User" />}
             </div>
           </div>
           <div className="form-wrapper">

@@ -1,6 +1,7 @@
 .productlist-container {
   display: flex;
   flex-direction: column;
+
   align-items: center;
   width: 100%;
 }
@@ -13,14 +14,14 @@
 .product-list-wrapper {
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .product-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0px;
+  gap: 20px;
   max-width: 85%;
   padding: auto;
 }

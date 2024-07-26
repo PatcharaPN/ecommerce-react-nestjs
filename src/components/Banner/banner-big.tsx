@@ -10,6 +10,7 @@ const divStyle = {
   borderRadius: "10px",
   duration: "5s",
   height: "400px",
+  zIndex: 1,
 };
 const slideImages = [
   {
