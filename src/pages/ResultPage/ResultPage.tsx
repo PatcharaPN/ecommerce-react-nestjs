@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./ResultPage.css";
 import StoreCard from "./components/StoreCard";
-import ProductList from "../../components/Product-list/Product-list";
 import { useLocation } from "react-router-dom";
 import {
   getProducts,
@@ -12,7 +11,6 @@ import {
 import { useAppDispatch, useAppSelector } from "../../app/store";
 import ProductCard from "../../components/Productcard/ProductCard";
 
-type Props = {};
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
@@ -46,18 +44,6 @@ const ResultPage = () => {
     }
   }, [query, products]);
 
-  const storeMockUp = [
-    {
-      id: 1,
-      name: "Somchai Shop",
-      description: "test Description",
-      location: "@Chaiyaphum",
-      owner: "Somchai",
-      storeimg:
-        "https://www.meme-arsenal.com/memes/21c37120a2d58729221ce61293189b35.jpg",
-      productCount: 10,
-    },
-  ];
   return (
     <div>
       <div className="result-header">

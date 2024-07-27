@@ -10,6 +10,14 @@
   width: 100%;
   margin-bottom: 20px;
 }
+#product-select {
+  border-radius: 20px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
 
 .product-list-wrapper {
   width: 100%;

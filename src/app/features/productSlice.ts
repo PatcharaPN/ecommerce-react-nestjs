@@ -11,6 +11,7 @@ export interface Product {
   description: string;
   imageUrl: string;
   rating: number;
+  category: Category;
   quantity: number;
   store: Store;
   location: Store["location"];
@@ -27,9 +28,15 @@ export interface Store {
   products: Product[];
 }
 
+export interface Category {
+  _id: string;
+  name: string;
+  description: string;
+}
 export interface ProductState {
   products: Product[];
   stores: Store[];
+  category: Category[];
   loading: boolean;
   error: string | null;
 }
@@ -37,9 +44,20 @@ export interface ProductState {
 const initialState: ProductState = {
   products: [],
   stores: [],
+  category: [],
   loading: false,
   error: null,
 };
+
+export const getCategory = createAsyncThunk<Category[], void, any>(
+  "product/getCategory",
+  async (): Promise<Category[]> => {
+    const { data } = await axios.get<Category[]>(
+      "http://localhost:3000/category"
+    );
+    return data;
+  }
+);
 
 export const getProducts: AsyncThunk<Product[], void, any> = createAsyncThunk(
   "product/getProducts",
@@ -50,7 +68,7 @@ export const getProducts: AsyncThunk<Product[], void, any> = createAsyncThunk(
     return res;
   }
 );
-export const submitProduct = createAsyncThunk<any, any, any>(
+export const submitProduct = createAsyncThunk<Product, any, any>(
   "products/submitProduct",
   async (formData: FormData) => {
     try {
@@ -167,7 +185,17 @@ const productSlice = createSlice({
       })
       .addCase(getStores.rejected, (state) => {
         state.loading = false;
-        // Handle error if needed
+      })
+      .addCase(getCategory.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getCategory.fulfilled, (state, action) => {
+        state.loading = false;
+        state.category = action.payload;
+      })
+      .addCase(getCategory.rejected, (state) => {
+        state.loading = false;
+        state.error = "error getting store";
       })
       .addCase(getProductsByStoreId.pending, (state) => {
         state.loading = true;
@@ -221,5 +249,6 @@ export const { setProducts, setStores } = productSlice.actions;
 export default productSlice.reducer;
 
 export const selectProducts = (state: RootState) => state.product.products;
+export const selectCategory = (state: RootState) => state.product.category;
 export const selectStores = (state: RootState) => state.product.stores;
 export const selectLoading = (state: RootState) => state.product.loading;

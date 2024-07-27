@@ -1,7 +1,5 @@
 import { Outlet, useLocation } from "react-router-dom";
-import SidebarLeft from "../Sidebar-left/Sidebar-left";
 import "./Layout.css";
-import SidebarRight from "../Sidebar-right/Sidebar-right";
 import Drawer from "../Drawer/Drawer";
 
 const LayoutWithoutNav = () => {

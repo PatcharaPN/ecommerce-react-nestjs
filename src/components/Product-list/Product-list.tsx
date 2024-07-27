@@ -2,9 +2,11 @@ import React, { useCallback, useEffect, useState } from "react";
 import "./Product-list.css";
 import { useAppDispatch, useAppSelector } from "../../app/store";
 import {
+  getCategory,
   getProducts,
   getStores,
   Product,
+  Category,
 } from "../../app/features/productSlice";
 import ProductCard from "../Productcard/ProductCard";
 import { ProductModal } from "../Product-modal/Product-modal";
@@ -13,6 +15,8 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 const ProductList: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | undefined>();
   const products = useAppSelector((state) => state.product.products);
+  const category = useAppSelector((state) => state.product.category);
+  const [productsCategory, setProductsCategory] = useState<Product[]>(products);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -37,9 +41,19 @@ const ProductList: React.FC = () => {
   }, [dispatch]);
 
   useEffect(() => {
+    dispatch(getCategory());
+  }, [dispatch]);
+
+  useEffect(() => {
     fetchProducts();
     fetchStores();
   }, [fetchProducts, fetchStores]);
+  useEffect(() => {
+    setProductsCategory(products);
+  }, [products]);
+  useEffect(() => {
+    setProductsCategory(products);
+  }, [products]);
 
   const handleProductClick = (product: Product) => {
     setSelectedProduct(product);
@@ -52,7 +66,7 @@ const ProductList: React.FC = () => {
 
   const indexOfLastProduct = currentPage * itemsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
-  const currentProducts = products.slice(
+  const currentProducts = productsCategory.slice(
     indexOfFirstProduct,
     indexOfLastProduct
   );
@@ -65,17 +79,42 @@ const ProductList: React.FC = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
   };
 
+  const handleCategoryChange = (selectedCategoryId: string) => {
+    if (selectedCategoryId === "") {
+      setProductsCategory(products);
+    } else {
+      const filteredProducts = products.filter((product) => {
+        return product.category && product.category._id === selectedCategoryId;
+      });
+      console.log("Filtered Products:", filteredProducts);
+      setProductsCategory(filteredProducts);
+    }
+  };
+
   return (
     <div className="product-list-container">
+      <select
+        id="product-select"
+        onChange={(e) => handleCategoryChange(e.target.value)}
+      >
+        <option className="selector" value="">
+          --Please choose a Category--
+        </option>
+        {category.map((cat) => (
+          <option key={cat._id} value={cat._id}>
+            {cat.name}
+          </option>
+        ))}
+      </select>
       <div className="filter-products"></div>
       <div className="product-list-wrapper">
         <div className="product-list">
           {currentProducts.length === 0 ? (
             <div>Products not found</div>
           ) : (
-            currentProducts.map((product, index) => (
+            currentProducts.map((product) => (
               <ProductCard
-                key={index}
+                key={product._id}
                 product={product}
                 onClick={() => handleProductClick(product)}
               />
@@ -102,7 +141,7 @@ const ProductList: React.FC = () => {
         <button
           className="pagination-btn next-btn"
           onClick={handleNextPage}
-          disabled={indexOfLastProduct >= products.length}
+          disabled={indexOfLastProduct >= productsCategory.length}
         >
           <Icon icon="ic:round-navigate-next" />
         </button>
