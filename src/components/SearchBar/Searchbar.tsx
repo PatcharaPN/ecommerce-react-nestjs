@@ -35,6 +35,10 @@ const Searchbar = () => {
     navigate(`/search?query=${searchTerm}`);
   };
 
+  const handleSuggestionClick = (suggestion: string) => {
+    setSearchTerm(suggestion);
+    setSearchResults([]);
+  };
   return (
     <div>
       <div className="searchbar">
@@ -55,7 +59,11 @@ const Searchbar = () => {
       </div>
       <div className="searchbar-results">
         {searchResults.map((product) => (
-          <div className="searchbar-result-item" key={product._id}>
+          <div
+            className="searchbar-result-item"
+            key={product._id}
+            onClick={() => handleSuggestionClick(product.name)}
+          >
             {product.name}
           </div>
         ))}
