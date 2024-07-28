@@ -33,7 +33,7 @@ const Routes = () => {
       element: <Layout />,
       children: [
         {
-          path: "/chat",
+          path: "/chat/:storeId/:userId",
           element: <ProtectedRoute element={<ChatPage />} />,
         },
       ],

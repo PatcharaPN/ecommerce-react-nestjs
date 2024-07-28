@@ -18,6 +18,11 @@ export interface Store {
   updatedAt: string;
 }
 
+export interface Message {
+  sender: string;
+  content: string;
+}
+
 export interface CreateStore {
   name: string;
   location: string;

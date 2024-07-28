@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./product-modal.css";
 import RatingComponent from "../Rating/ratingstar";
 import { Icon } from "@iconify/react";
@@ -6,6 +6,8 @@ import { Product, Store } from "../../app/features/productSlice";
 import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../app/features/cartSlice";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { RootState, useAppSelector } from "../../app/store";
 
 interface ProductModalProps {
   product?: Product;
@@ -19,6 +21,10 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   closeModal,
 }) => {
   const dispatch = useDispatch();
+  const user = useAppSelector((state: RootState) => state.auth.currentUser);
+  const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState([]);
+  const navigate = useNavigate();
   console.log(product);
 
   const handleAddToCart = (product: Product) => {
@@ -27,6 +33,9 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   };
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
+  };
+  const handleChatClick = () => {
+    navigate(`/chat/${store._id}/${user._id}`);
   };
   return (
     <div className="modal-backdrop" onClick={closeModal}>
@@ -107,7 +116,9 @@ export const ProductModal: React.FC<ProductModalProps> = ({
 
               <div className="follow-btn-section">
                 <button className="follow-btn">Follow</button>
-                <button className="chat-btn">Chat</button>
+                <button className="chat-btn" onClick={handleChatClick}>
+                  Chat
+                </button>
               </div>
             </div>
           </div>
