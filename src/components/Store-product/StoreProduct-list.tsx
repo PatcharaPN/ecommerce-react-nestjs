@@ -3,6 +3,7 @@ import "./StoreProduct-list.css";
 import { useAppDispatch, useAppSelector } from "../../app/store";
 import {
   deleteProduct,
+  getCategory,
   Product,
   selectProducts,
   submitProduct,
@@ -20,6 +21,8 @@ const StoreProductList: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [storeId, setStoreId] = useState<string>("");
+
+  const category = useAppSelector((state) => state.product.category);
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
   const products = useAppSelector(selectProducts);
@@ -31,6 +34,7 @@ const StoreProductList: React.FC = () => {
     description: "",
     price: 0,
     quantity: 0,
+    category: "",
     file: null,
     store: storeId,
   });
@@ -46,6 +50,13 @@ const StoreProductList: React.FC = () => {
         localStorage.removeItem("storeId");
       }
     }
+  }, []);
+
+  const fetchCategory = () => {
+    dispatch(getCategory());
+  };
+  useEffect(() => {
+    fetchCategory();
   }, []);
 
   useEffect(() => {
@@ -123,6 +134,7 @@ const StoreProductList: React.FC = () => {
     form.append("description", formValues.description);
     form.append("price", formValues.price.toString());
     form.append("quantity", formValues.quantity.toString());
+    form.append("category", formValues.category);
     form.append("store", storeId);
 
     if (file) {
@@ -138,12 +150,19 @@ const StoreProductList: React.FC = () => {
         price: 0,
         quantity: 0,
         file: null,
+        category: "",
         store: storeId,
       });
       console.log("Product creation result:", response);
     } catch (error) {
       console.error("Error creating product:", error);
     }
+  };
+  const setSelectorCategory = (productType: string) => {
+    setFormValues({
+      ...formValues,
+      category: productType,
+    });
   };
   return (
     <div className="product-list-container">
@@ -217,6 +236,16 @@ const StoreProductList: React.FC = () => {
               </div>
               <div className="create-product-form">
                 <form onSubmit={handleSubmitProduct}>
+                  <select className="product-type-form" name="" id="">
+                    <option className="selector" value="">
+                      --Please choose a Category--
+                    </option>
+                    {category.map((cat) => (
+                      <option onClick={() => setSelectorCategory(cat._id)}>
+                        {cat.name}
+                      </option>
+                    ))}
+                  </select>
                   <div className="create-product-form">
                     Product name
                     <input
@@ -257,6 +286,7 @@ const StoreProductList: React.FC = () => {
                       onChange={handleInputChange}
                     />
                   </div>
+
                   <div className="submit-button">
                     <button
                       className="create-btn"

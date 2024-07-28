@@ -88,6 +88,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
           <div className="description-section">
             <div className="first-desc">
               <h3 className="detail-header">Details of Product</h3>
+              <p>{product?.description}</p>
             </div>
           </div>
           <div className="shop-section">

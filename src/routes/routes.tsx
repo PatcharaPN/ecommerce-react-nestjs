@@ -9,6 +9,7 @@ import StorePage from "../pages/StorePage/StorePage";
 import Notfound from "../pages/NotFound/Notfound";
 import LayoutWithoutNav from "../components/Layout/LayoutWithoutSidebar";
 import ResultPage from "../pages/ResultPage/ResultPage";
+import ChatPage from "../pages/ChatPage/ChatPage";
 
 const Routes = () => {
   const routes = useRoutes([
@@ -16,6 +17,26 @@ const Routes = () => {
       path: "/",
       element: <Layout />,
       children: [{ path: "/", element: <ProtectedRoute element={<App />} /> }],
+    },
+    {
+      path: "/store",
+      element: <Layout />,
+      children: [
+        {
+          path: "/store/:storeid",
+          element: <ProtectedRoute element={<StorePage />} />,
+        },
+      ],
+    },
+    {
+      path: "/chat",
+      element: <Layout />,
+      children: [
+        {
+          path: "/chat",
+          element: <ProtectedRoute element={<ChatPage />} />,
+        },
+      ],
     },
     {
       path: "/store",

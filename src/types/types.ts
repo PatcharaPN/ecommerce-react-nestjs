@@ -5,6 +5,7 @@ export interface FormValues {
   quantity: number;
   file: string | null;
   store: string;
+  category: string;
 }
 export interface Store {
   _id: string;

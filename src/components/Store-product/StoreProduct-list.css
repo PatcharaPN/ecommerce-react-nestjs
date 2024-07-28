@@ -8,6 +8,13 @@
   z-index: 1000;
   animation: fadeIn 0.2s;
 }
+.product-type-form {
+  width: 100%;
+  margin: 20px 0;
+  padding: 20px 20px;
+  border-radius: 20px;
+  border: none;
+}
 .header-modal {
   display: flex;
   justify-content: space-between;

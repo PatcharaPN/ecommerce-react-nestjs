@@ -69,7 +69,9 @@ const Drawer: React.FC = () => {
       </div>
       <div className="menu">
         <div className="chat">
-          <Icon className="chat-icon" icon="majesticons:chat-line" />
+          <Link to="/chat">
+            <Icon className="chat-icon" icon="majesticons:chat-line" />
+          </Link>
         </div>
 
         <Cart />
