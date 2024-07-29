@@ -1,8 +1,9 @@
-import Banner from "./components/Banner/banner";
-import Categorymenu from "./components/Categorymenu/categorymenu";
-import Headermenu from "./components/Headermenu/headermenu";
+import Banner from "./components/Banner/Banner";
+import Categorymenu from "./components/Categorymenu/Categorymenu";
+
 import ProductList from "./components/Product-list/Product-list";
-import { Footer } from "./components/Footer/footer";
+import { Footer } from "./components/Footer/Footer";
+import Headermenu from "./components/headermenu/headermenu";
 const App: React.FC = () => {
   return (
     <div>

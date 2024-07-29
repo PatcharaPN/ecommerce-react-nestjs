@@ -42,3 +42,9 @@ export interface StoreValue {
   like: number;
   products: string[];
 }
+export interface Message {
+  sender: string;
+  content: string;
+  storeName: string;
+  createdAt: Date;
+}

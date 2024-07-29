@@ -4,12 +4,13 @@ import Layout from "../components/Layout/Layout";
 
 import App from "../App";
 import LoginPage from "../pages/LoginPage/LoginPage";
-import ProtectedRoute from "./ProtectedRoute";
+
 import StorePage from "../pages/StorePage/StorePage";
 import Notfound from "../pages/NotFound/Notfound";
 import LayoutWithoutNav from "../components/Layout/LayoutWithoutSidebar";
 import ResultPage from "../pages/ResultPage/ResultPage";
 import ChatPage from "../pages/ChatPage/ChatPage";
+import ProtectedRoute from "./ProtectedRoute";
 
 const Routes = () => {
   const routes = useRoutes([
@@ -33,7 +34,7 @@ const Routes = () => {
       element: <Layout />,
       children: [
         {
-          path: "/chat",
+          path: "/chat/:storeId/:userId",
           element: <ProtectedRoute element={<ChatPage />} />,
         },
       ],

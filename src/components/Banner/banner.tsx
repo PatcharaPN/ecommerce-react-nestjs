@@ -1,5 +1,5 @@
-import { BigImage } from "./banner-big";
-import "./banner.css";
+import { BigImage } from "./Banner-big";
+import "./Banner.css";
 interface BannerProps {
   LargeImage: string;
   smallImagetop: string;

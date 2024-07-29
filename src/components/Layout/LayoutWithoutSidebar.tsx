@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
 import "./Layout.css";
-import Drawer from "../Drawer/Drawer";
+import Drawer from "../Drawer/Nav";
 
 const LayoutWithoutNav = () => {
   const location = useLocation();

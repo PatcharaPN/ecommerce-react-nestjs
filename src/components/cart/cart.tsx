@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react";
 import { useState } from "react";
-import "./cart.css";
+import "./Cart.css";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { motion } from "framer-motion";

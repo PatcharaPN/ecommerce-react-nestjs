@@ -16,6 +16,111 @@
   border: solid 0.5px black;
   border-radius: 50px;
 }
+.chat-wrapper {
+  height: 80%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: end;
+}
+#date-msg {
+  font-weight: 600;
+  color: #989898;
+  font-size: 12px;
+}
+.sender {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: end;
+}
+.message {
+  width: fit-content;
+  background-color: #ff3985;
+  margin: 5px;
+  padding: 15px;
+  text-align: end;
+  color: #ffffff;
+  border-radius: 20px;
+}
+#chat-name {
+  font-size: 17px;
+  font-weight: bold;
+}
+#online {
+  font-weight: 700;
+  opacity: 40%;
+}
+.chat-header {
+  width: fit-content;
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 20px;
+}
+.chat-session {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.chat-name {
+}
+.chat-profile-pic {
+  width: 50px;
+  height: 50px;
+  background-color: #989898;
+  border-radius: 50%;
+}
+.chat-input {
+  position: absolute;
+  width: 80%;
+  padding: 20px;
+  border-radius: 50px;
+  bottom: 0;
+  background-color: #f7f7f7;
+  border: none;
+  font-size: 16px;
+}
+.chat-input::placeholder {
+  color: #989898;
+}
+.attach-btn-wrapper {
+  position: absolute;
+  left: 20px;
+  bottom: 5px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  color: #989898;
+}
+.attach-btn {
+  position: absolute;
+}
+
+.sent-btn-wrapper {
+  position: absolute;
+  right: 20px;
+  bottom: 5px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  background-color: #ff3985;
+}
+.sent-btn {
+  color: #ffffff;
+}
 .search-button {
   position: absolute;
   color: #ffffff;

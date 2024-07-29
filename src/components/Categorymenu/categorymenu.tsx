@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import "./categorymenu.css";
+import "./Categorymenu.css";
 import { Icon } from "@iconify/react";
 function Categorymenu() {
   return (

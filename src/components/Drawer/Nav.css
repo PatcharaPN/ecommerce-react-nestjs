@@ -17,6 +17,18 @@
   color: #ffffff;
   font-size: 35px;
 }
+.language-changer {
+  padding: 7px;
+  border: none;
+  border-radius: 5px;
+  font-size: 25px;
+  background-color: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .chat {
   width: 30px;
   display: flex;

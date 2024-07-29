@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react";
-import "./Drawer.css";
+import "./Nav.css";
 import { useEffect, useState } from "react";
-import { Cart } from "../Cart/cart";
+import { Cart } from "../cart/Cart";
 import { useDispatch } from "react-redux";
 import { AppDispatch, RootState, useAppSelector } from "../../app/store";
 import { getProducts } from "../../app/features/productSlice";
@@ -75,6 +75,11 @@ const Drawer: React.FC = () => {
         </div>
 
         <Cart />
+        <button className="language-changer">
+          <Icon icon="ic:baseline-language" />{" "}
+          <Icon icon="iconamoon:arrow-down-2-bold" />
+        </button>
+
         <div className="user-con" onClick={toggleDrawer}>
           <img
             src={user?.userImage}
@@ -100,6 +105,7 @@ const Drawer: React.FC = () => {
               <div className="name">{user ? user.username : "Guest"}</div>
               <div>{user?.role}</div>
             </div>
+
             <div className="user-profile">
               <motion.img
                 onClick={toggleModal}

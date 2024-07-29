@@ -9,12 +9,13 @@ import {
   submitProduct,
 } from "../../app/features/productSlice";
 import ProductCard from "../Productcard/ProductCard";
-import { ProductModal } from "../Product-modal/Product-modal";
+
 import { selectUser } from "../../app/features/authSlice";
 import { selectLoading } from "../../app/features/productSlice";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 import { FormValues } from "../../types/types";
+import { ProductModal } from "../Product-modal/Product-modal";
 
 const StoreProductList: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | undefined>();

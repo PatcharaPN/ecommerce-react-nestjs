@@ -1,6 +1,6 @@
 import React from "react";
 import "./Notfound.css";
-import Drawer from "../../components/Drawer/Drawer";
+import Drawer from "../../components/Drawer/Nav";
 import { Link } from "react-router-dom";
 type Props = {};
 
