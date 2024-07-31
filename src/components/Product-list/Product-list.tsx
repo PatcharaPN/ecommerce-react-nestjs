@@ -20,7 +20,7 @@ const ProductList: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 12;
 
   const dispatch = useAppDispatch();
 

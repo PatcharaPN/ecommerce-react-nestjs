@@ -11,6 +11,7 @@
   margin-bottom: 20px;
 }
 #product-select {
+  margin-left: 17%;
   border-radius: 20px;
   border: none;
   display: flex;
@@ -44,7 +45,7 @@
   cursor: pointer;
   border-radius: 50%;
   border: none;
-  background-color: #ee5897;
+  background-color: #383838;
   color: #ffffff;
 }
 .product-list {

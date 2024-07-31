@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Product-modal.css";
 import RatingComponent from "../Rating/ratingstar";
 import { Icon } from "@iconify/react";
@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../app/features/cartSlice";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { io } from "socket.io-client";
+
 import { RootState, useAppSelector } from "../../app/store";
 
 interface ProductModalProps {
@@ -24,6 +24,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   const dispatch = useDispatch();
   const user = useAppSelector((state: RootState) => state.auth.currentUser);
   const navigate = useNavigate();
+  const createdAtDate = new Date(product?.createdAt ?? "");
   const handleChatClick = () => {
     navigate(`/chat/${store._id}/${user._id}`);
   };
@@ -97,6 +98,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
             <div className="first-desc">
               <h3 className="detail-header">Details of Product</h3>
               <p>{product?.description}</p>
+              <p>{createdAtDate.toLocaleDateString()}</p>
             </div>
           </div>
           <div className="shop-section">

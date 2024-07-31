@@ -1,0 +1,29 @@
+.newest-products-list {
+  display: flex;
+  justify-content: center;
+}
+.news-icon-wrapper {
+  position: relative;
+}
+.news-icon {
+  position: absolute;
+  background-color: #ff5555;
+  border-radius: 10px;
+  padding: 5px;
+  color: #ffffff;
+  top: 10px;
+  left: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  animation: woop 1s ease-in-out infinite;
+}
+
+@keyframes woop {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}

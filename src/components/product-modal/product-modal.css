@@ -220,8 +220,7 @@
 .create-btn {
   padding: 10px;
 }
-.import-image {
-}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

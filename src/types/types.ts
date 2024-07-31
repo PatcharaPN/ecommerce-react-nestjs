@@ -32,6 +32,7 @@ export interface User {
   email: string;
   date: string;
   userImage: string;
+  carts: string;
 }
 
 export interface StoreValue {

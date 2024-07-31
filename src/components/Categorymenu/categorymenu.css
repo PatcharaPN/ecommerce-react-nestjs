@@ -34,6 +34,12 @@
 .img-wrapper {
   display: flex;
   justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+
+  background-color: rgba(163, 163, 163, 0.216);
 }
 
 .shortmenu .menu-text {

@@ -1,4 +1,4 @@
-.headermenu {
+.news {
   display: flex;
   justify-content: space-between;
   padding-left: 150px;
@@ -7,4 +7,10 @@
 .text-underline {
   text-decoration: underline;
   color: rgb(83, 145, 207);
+}
+.news-products {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

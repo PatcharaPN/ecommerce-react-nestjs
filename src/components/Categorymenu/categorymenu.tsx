@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import "./Categorymenu.css";
-import { Icon } from "@iconify/react";
 function Categorymenu() {
   return (
     <div className="category-container">
@@ -29,7 +28,7 @@ function Categorymenu() {
         <motion.div whileHover={{ scale: 1.1 }} className="shortmenu">
           {" "}
           <div className="img-wrapper">
-            <img src="../Games.svg" width={50} alt="" />{" "}
+            <img src="../Games.svg" alt="" />
           </div>
           <p className="menu-text">Games</p>
         </motion.div>
@@ -43,7 +42,7 @@ function Categorymenu() {
         <motion.div whileHover={{ scale: 1.1 }} className="shortmenu">
           {" "}
           <div className="img-wrapper">
-            <img src="../IT.svg" width={50} alt="" />{" "}
+            <img src="../laptop.svg" width={50} alt="" />{" "}
           </div>
           <p className="menu-text">IT</p>
         </motion.div>

@@ -12,7 +12,7 @@ const ChatPage = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [storeName, setStoreName] = useState<string>("");
   const [socket, setSocket] = useState<Socket | null>(null);
-  const [chatUsers, setChatUsers] = useState<User[]>([]); // New state for chat users
+  const [chatUsers, setChatUsers] = useState<User[]>([]);
 
   useEffect(() => {
     const fetchStoreDetails = async () => {

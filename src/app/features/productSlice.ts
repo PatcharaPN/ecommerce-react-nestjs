@@ -12,6 +12,7 @@ export interface Product {
   imageUrl: string;
   rating: number;
   category: Category;
+  createdAt: Date;
   quantity: number;
   store: Store;
   location: Store["location"];

@@ -37,7 +37,7 @@
 }
 .message {
   width: fit-content;
-  background-color: #ff3985;
+  background-color: #383838;
   margin: 5px;
   padding: 15px;
   text-align: end;
@@ -116,7 +116,7 @@
   border-radius: 50%;
   justify-content: center;
   align-items: center;
-  background-color: #ff3985;
+  background-color: #383838;
 }
 .sent-btn {
   color: #ffffff;
@@ -132,7 +132,7 @@
   border-radius: 50px;
   justify-content: center;
   align-items: center;
-  background-color: #ff3985;
+  background-color: #383838;
 }
 .user-list-chat {
   width: 100%;
